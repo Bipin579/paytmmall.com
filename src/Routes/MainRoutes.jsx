@@ -10,6 +10,9 @@ import Grocery from '../Pages/Grocery';
 import Jwellery from '../Pages/Jwellery';
 import TravelHolidays from '../Pages/TravelHolidays';
 import NotFound from '../Pages/NotFound';
+import Login from '../Pages/Login';
+import Cart from '../Pages/Cart';
+import Orders from '../Pages/Orders';
 
 
 const MainRoutes = () => {
@@ -25,6 +28,9 @@ const MainRoutes = () => {
               <Route path='/jwellery' element={<Jwellery/>} />
               <Route path='/travel&holidays' element={<TravelHolidays/>} />
               <Route path='*' element={<NotFound/>} />
+              <Route path='/login' element={<Login/>} />
+              <Route path='/cart' element={<Cart/>} />
+              <Route path='/orders' element={<Orders/>} />
           </Routes>
     </div>
   )
