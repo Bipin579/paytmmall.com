@@ -14,6 +14,7 @@ import Login from '../Pages/Login';
 import Cart from '../Pages/Cart';
 import Orders from '../Pages/Orders';
 import SingleProductPage from '../Pages/SingleProductPage';
+import Admin from '../Pages/Admin';
 
 
 const MainRoutes = () => {
@@ -33,6 +34,7 @@ const MainRoutes = () => {
               <Route path='/cart' element={<Cart/>} />
               <Route path='/orders' element={<Orders/>} />
               <Route path='/product:id' element={<SingleProductPage/>} />
+              <Route path='/admin' element={<Admin/>} />
           </Routes>
     </div>
   )
