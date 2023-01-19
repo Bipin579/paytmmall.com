@@ -1,7 +1,6 @@
-import React from 'react'
+import ManageUsers from './ManageUsers';
 
-export const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
+const Dashboard = () => {
+  return <ManageUsers/>
 }
+export default Dashboard;

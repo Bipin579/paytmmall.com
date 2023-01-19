@@ -1,7 +1,7 @@
-import React from 'react'
-
-export const ManageOrders = () => {
+const ManageOrders = () => {
   return (
     <div>ManageOrders</div>
   )
 }
+
+export default ManageOrders;
