@@ -21,7 +21,7 @@ import Navbar from '../components/Navbar';
 const MainRoutes = () => {
   return (
       <div>
-        <Navbar user={'user'}/>
+        
           <Routes>
               <Route path='/' element={<HomePage/>} />
               <Route path='/beauty&health' element={<BeautyHealth/>} />
