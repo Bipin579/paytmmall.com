@@ -64,10 +64,7 @@ const reducer = (state = inisitalState, { type, payload }) => {
     case DELETE_USER_REQUEST:
       return { ...state, isLoadingUserDelete: true };
     case DELETE_USER_SUCCESS:
-      return {
-        ...state,
-        isLoadingUserDelete: false,
-        users: state.users.filter((email) => email !== payload),
+      return {...state,isLoadingUserDelete: false,users: state.users.filter((email) => email !== payload),
       };
     case DELETE_USER_FAILURE:
       return { ...state, isLoadingUserDelete: false, isErrorUserDelete: true };

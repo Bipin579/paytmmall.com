@@ -9,8 +9,6 @@ const AddProducts = () => {
   const [form,setForm]=useState(initForm);
   const formChangeHandler=(e)=>{
     const {name, value}=e.target;
-    // form[name]=value;
-    // setForm(form);
     setForm({...form,[name]:value})
   }
 

@@ -15,13 +15,10 @@ import Cart from '../Pages/Cart';
 import Orders from '../Pages/Orders';
 import SingleProductPage from '../Pages/SingleProductPage';
 import Admin from '../Pages/Admin';
-import Navbar from '../components/Navbar';
-
 
 const MainRoutes = () => {
   return (
-      <div>
-        
+      <div>   
           <Routes>
               <Route path='/' element={<HomePage/>} />
               <Route path='/beauty&health' element={<BeautyHealth/>} />
