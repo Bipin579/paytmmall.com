@@ -42,6 +42,11 @@ export const signup = (user) => (dispatch) => {
     
 };
 
-export const login = () => {
-    
+export const login = (dispatch) => {
+    dispatch(loginRequestAction())
+    axios.get(`https://paytmmallserver.onrender.com/users`).then((res) => {
+        dispatch(loginSuccessAction(res.data));
+    }).catch((err) => {
+        dispatch(loginRequestAction());
+    })
 }
