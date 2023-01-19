@@ -36,7 +36,7 @@ const MainRoutes = () => {
               <Route path='/cart' element={<Cart/>} />
               <Route path='/orders' element={<Orders/>} />
               <Route path='/product:id' element={<SingleProductPage/>} />
-              {/* <Route path='/admin' element={<Admin/>} /> */}
+              <Route path='/admin' element={<Admin/>} />
           </Routes>
     </div>
   )

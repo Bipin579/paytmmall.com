@@ -1,13 +1,15 @@
 
 import './App.css';
-import AdminRoutes from './Routes/AdminRoutes';
+
+import Footer from './components/Footer';
+
 import MainRoutes from './Routes/MainRoutes';
 
 function App() {
   return (
     <div className="App">
       <MainRoutes/>
-      <AdminRoutes/>
+      <Footer/>
     </div>
   );
 }
