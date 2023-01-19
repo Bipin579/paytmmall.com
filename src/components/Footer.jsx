@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Footer.module.css";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import {
   AiFillApple,
   AiFillWindows,
@@ -13,7 +13,9 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { FaFacebookF } from "react-icons/fa";
 import { ImInstagram } from "react-icons/im";
 const Footer = () => {
+
   return (
+
     <Box background="#f4f4f4" border="1px solid white" w={{base: '200%', md: '180%', lg: '100%'}}>
       <Box className={styles.f1}>
         <Text fontSize={{ base: '8px', md: '10px', lg: 'xs' }} align="left">
@@ -22,6 +24,7 @@ const Footer = () => {
           by merchants that accept ‘Pay with Paytm’
         </Text>
       </Box>
+      {/* ====================================ICONS PART =================================== */}
       <Box className={styles.f2}>
         <Box className={styles.options}>
           <a href="">About Us</a>
@@ -58,6 +61,7 @@ const Footer = () => {
           </Box>
         </Box>
       </Box>
+      {/* ======================================LOGOS PART========================================= */}
       <Box className={styles.p_logos}>
         <Box className={styles.logos}>
           <Box>
@@ -69,9 +73,9 @@ const Footer = () => {
             </Box>
           </Box>
           <Box>
-            <Box className={styles.paytm}>
-              <img
-                width="50px"
+            <Box>
+              <Image
+                w="50px"
                 src="https://paytmmall-clone.netlify.app/logo/mainLogo.png"
                 alt=""
               />
@@ -94,6 +98,7 @@ const Footer = () => {
           </Box>
         </Box>
       </Box>
+      {/* ================================================DROPDOWN PART==================================== */}
       <Box mt="20px" bg="white">
         <Text
           align="left"
