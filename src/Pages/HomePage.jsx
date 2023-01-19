@@ -2,7 +2,7 @@ import "./Homepage.css";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Carosel } from "../components/Carousel.jsx";
 
-export const Homepage = () => {
+const Homepage = () => {
   return (
     <div>
       <div className="product-container">
@@ -211,3 +211,5 @@ export const Homepage = () => {
     </div>
   );
 };
+
+export default Homepage;

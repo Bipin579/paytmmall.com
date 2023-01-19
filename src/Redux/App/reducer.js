@@ -25,7 +25,7 @@ export const reducer = (state = initialState, { type, payload }) => {
     case GET_CAROSELS_DATA_REQUEST:
       return { ...state, isLoading: true };
     case GET_CAROSELS_DATA_SUCCESS:
-      return { ...state, isLoading: false, allcarosel: payload, isError: false };
+      return { ...state, isLoading: false, allcarosels: {...payload}, isError: false };
     case GET_CAROSELS_DATA_FAILURE:
       return { ...state, isLoading: false, isError: true };
     default:

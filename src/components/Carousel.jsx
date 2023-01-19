@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Mycard from "../Components/MyCard";
-import "./Carousal.css";
-import {useDispatch,useSelector} from 'react-redux'
-import { getData } from "../Redux/App/action";
+import Mycard from "./MyCard"
+import "./Carousel.css";
+import {useDispatch, useSelector} from "react-redux"
+import { getCarosels } from "../Redux/App/action";
 
 export const Carosel = () => {
 
-const dispatch=useDispatch();
-const caroseldata=useSelector((store) =>store.appReducer)
-console.log(caroseldata.data.carosel1);
+
 
   let box = document.querySelector(".product-carousel");
   let box2 = document.querySelector(".product-carousel2");
   let box3 = document.querySelector(".product-carousel3");
 
-  const [data, setData] = useState([]);
-  const [data2, setData2] = useState([]);
-  const [data3, setData3] = useState([]);
+  const dispatch = useDispatch();
+  const allcarosels = useSelector(store => store.AppReducer.allcarosels);
+
 
   const carouselSlidePrev = () => {
     let width = box.clientWidth;
@@ -45,12 +43,9 @@ console.log(caroseldata.data.carosel1);
   };
 
   useEffect(() => {
-    dispatch(getData);
-     setData(caroseldata.data.carosel1);
-     setData2(caroseldata.data.carosel2)
-     setData3(caroseldata.data.carosel3)
+    dispatch(getCarosels);
   }, []);
-
+// console.log(allcarosel);
   return (
     <div>
       <div id="satyam">
@@ -61,9 +56,9 @@ console.log(caroseldata.data.carosel1);
           <p>&gt;</p>
         </button>
         <div className="product-carousel">
-          {data.length > 0 &&
-            data.map((el) => {
-              return <Mycard image={el.img} name={el.name} />;
+          {
+            allcarosels.carosel1?.map((el) => {
+              return <Mycard key={el.id} image={el.img} name={el.name} />;
             })}
         </div>
       </div>
@@ -78,9 +73,9 @@ console.log(caroseldata.data.carosel1);
           <p>&gt;</p>
         </button>
         <div className="product-carousel2">
-          {data2.length > 0 &&
-            data2.map((el) => {
-              return <Mycard image={el.img} name={el.name} />;
+          {
+            allcarosels.carosel2?.map((el) => {
+              return <Mycard key={el.id} image={el.img} name={el.name} />;
             })}
         </div>
       </div>
@@ -95,9 +90,9 @@ console.log(caroseldata.data.carosel1);
           <p>&gt;</p>
         </button>
         <div className="product-carousel3">
-          {data3.length > 0 &&
-            data3.map((el) => {
-              return <Mycard image={el.img} name={el.name} />;
+          {
+            allcarosels.carosel3?.map((el) => {
+              return <Mycard key={el.id} image={el.img} name={el.name} />;
             })}
         </div>
       </div>
