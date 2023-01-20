@@ -7,12 +7,12 @@ import { Box, Text, Image, Flex, VStack } from "@chakra-ui/react";
 import cartbag from "./cartbag.png";
 import list from "./list.png";
 import { Link } from "react-router-dom";
-import Login from "../Pages/Login";
+import image from '../Utils/image.png';
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
 
   const checkScroll = () => {
-    if (window.scrollY >= 80 && window.scrollY <= 4100) {
+    if (window.scrollY >= 70 && window.scrollY <= 4100) {
       setIsSticky(true);
     } else {
       setIsSticky(false);
@@ -20,44 +20,44 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", checkScroll);
 
-  const loginPage = () => {
-    Login();
-  };
+
 
   return (
-    <Box w={{ base: "200%", md: "180%", lg: "100%" }}>
+
+    <Box w={{ base: "200%", md: "180%", lg: "100%" }} >
       <Box className="paytm_mall_logo">
-        <a href="">
+        <Link to='/'>
           <Image
-            src="https://thelogofinder.com/wp-content/uploads/2022/08/Paytm-Mall.svg"
-            alt=""
+            p='6px'
+            src={image}
+            alt="unique_logo"
           />
-        </a>
+        </Link>
       </Box>
       <Box
         className="navbar"
         w={{ md: "100%", lg: "100%" }}
         m="auto"
         position={isSticky ? "fixed" : "static"}
-        top="0px"
+        top="-7px"
         backgroundColor="white"
         zIndex="1000"
-        py={5}
+       
       >
         <Box className="navLeft">
-          <Box className={"active4"} w={{ base: "40%", md: "18%", lg: "20%" }}>
+          <Box className="active" w={{ base: "40%", md: "18%", lg: "20%" }}>
             <Box className="nav_category">
               <Box>
                 <GiHamburgerMenu color="red" />
               </Box>
               <Box>
-                <Text fontSize={{ base: "xs", md: "sm", lg: "sm" }}>
+                <Text as='b' fontSize={{ base: "xs", md: "sm", lg: "sm" }}>
                   Shop By Category
                 </Text>
               </Box>
             </Box>
 
-            <Box className="deepmenu4">
+            <Box className="deepmenu">
               <ul style={{ display: "inline-block" }} className="menu" />
               <Box className="first">
                 <Box
@@ -133,21 +133,22 @@ const Navbar = () => {
           ml={{ base: "-15px" }}
           p={{ base: "0px" }}
           w={{ base: "50%", md: "40%", lg: "30%" }}
+         
         >
-          <Box className="order" w={{ base: "20%" }}>
+          <Box  className="order" w={{ base: "20%",md:'30%',lg:'33%' }}>
             <Image src={list} alt="order_list_logo" />
             <Text fontSize={{ base: "10px", sm: "md", lg: "md" }}>
               My Orders
             </Text>
           </Box>
 
-          <Box className="cart">
+          <Box   className="cart" w={{ base: "20%",md:'30%',lg:'33%' }}>
             <Image width="30px" src={cartbag} alt="cart_logo" />
             <Text fontSize={{ base: "10px", md: "md", lg: "md" }}>
               No Items in the Bag
             </Text>
           </Box>
-          <Box className="user" w={{ base: "33%" }} onClick={loginPage}>
+          <Box  className="user" w={{ base: "33%", md:'30%',lg:'33%'}}>
             <Image
               src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
               alt=""

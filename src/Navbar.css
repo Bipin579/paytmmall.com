@@ -86,27 +86,28 @@
   justify-content: space-around;
   align-items: center;
   right: 12px;
-  padding: 10px;
+  padding: 2px;
   background-color: white;
 }
 .nav_right div {
-  width: 25%;
+  width: 28%;
 }
 .searchBar{
     font-size: small;
 }
 /* categories */
 .nav_category{
-    border: 1px solid gray;
+    border: 1px solid rgba(128, 128, 128, 0.473);
     display: flex;
-    justify-content: center;
+    justify-content:space-around;
     align-items: center;
     padding: 10px;
+    cursor: pointer;
 }
-.deepmenu4{
+.deepmenu{
     display: none;
 }
-.active4:hover .deepmenu4{
+.active:hover .deepmenu{
     display: block;
     position:absolute;
     text-align: left;
@@ -114,11 +115,16 @@
     background-color: white;
     color : black;
     padding: 6px;
+    z-index:1000;
+   
    }
   .first:hover .localWarehouse {
   display: block;
   position: absolute;
-  cursor: pointer;
+ 
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.deepmenu p{
+    cursor: pointer;
 }
