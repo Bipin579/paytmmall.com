@@ -1,4 +1,5 @@
-import { Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Image, SimpleGrid, Text } from '@chakra-ui/react'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const FurnitureElectronics = () => {

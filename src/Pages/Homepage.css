@@ -8,20 +8,90 @@ img {
     text-align: left;
     margin: 2% 1%;
   }
+  #foot h4{
+    font-weight: bolder;
+  }
   .shops > div:hover {
     width: 102%;
     cursor: pointer;
   }
-  .foot > div {
-    margin: 20px 0px;
-    border: 2px solid red;
+  .footbox {
+    margin-top: 30px ;
   }
-  .foot p {
+  .footbox p {
     text-align: center;
     font-size: 13px;
   }
-  .foot h4 {
+  .footbox h4 {
     text-align: center;
     font-size: 13px;
+  }
+  .footbox > div > img {
+    width: 10%;
+    margin-left: 45%;
+  }
+  
+  #main h1{
+   margin-top: 10px;
+   margin-bottom: 10px;
+   font-size: 30px;
+   font-weight: bolder;
+  }
+  /* ------------------------------ */
+
+  .grocery {
+    position: relative;
+    overflow: hidden;
+    padding: 26px;
+  }
+  
+  .grocery-container {
+    padding: 0 10px;
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .groceryprebtn,
+  .grocerynextbtn {
+    border: none;
+    width: 60px;
+    height: auto;
+    position: absolute;
+    top: 30%;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  .grocerynextbtn {
+    right: 0;
+  }
+  
+  .grocerynextbtn p,
+  .groceryprebtn p {
+    font-size: 50px;
+    background-color: rgba(255, 255, 255, 0.436);
+    box-shadow: 0px 0px 10px 1px black;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    width: 50px;
+    height: 80px;
+    cursor: pointer;
+  }
+  .grocerycard {
+    min-width: 22%;
+    max-width: 22%;
+    height: auto;
+    margin: 2%;
+    color: black;
+  }
+  .grocerycard > img {
+    height: 80%;
+    width: 100%;
+    border-radius: 0px;
+  }
+  .grocerycard:hover {
+    width: 102%;
+    cursor: pointer;
   }
   
