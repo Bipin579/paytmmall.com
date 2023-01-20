@@ -1,5 +1,5 @@
 .f1 {
-  max-width: 1680px;
+ 
   margin: 15px auto;
   background: #fff;
   border-radius: 3px;
@@ -54,38 +54,23 @@
 }
 
 .logos {
-  max-width: 1680px;
-  margin: 0 auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  display: flex; justify-content: space-between;
+  
 }
 .logos > div:first-child {
   display: flex;
 }
-.logos > div:last-child {
-  display: flex;
-  gap: 20px;
-}
+
 .first {
   width: 200px;
   height: 20px;
   font-size: small;
 }
-.f_paytm,
-.P_wallet {
+.f_paytm
+ {
   border: 1px solid rgba(128, 128, 128, 0.39);
   border-radius: 2px;
-  padding: 3px 10px 5px 5px;
+  padding: 3px 3px 5px 5px;
 }
 .bottom {
   display: grid;

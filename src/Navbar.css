@@ -19,7 +19,7 @@
   width: 66%;
   display: flex;
   align-items: center;
-  gap: 20px;
+  
 }
 
 .nav_options {
@@ -44,9 +44,8 @@
   justify-content: space-between;
   border: 1px solid #cecece;
   border-radius: 2px;
-  padding: 10px;
- 
-}
+ }
+
 .options input {
   width: 95%;
   border: none;
@@ -61,7 +60,7 @@
 .order img,
 .user img {
   margin: auto;
-  width: 25px;
+ 
 }
 .order,
 .cart,
@@ -101,7 +100,6 @@
     display: flex;
     justify-content:space-around;
     align-items: center;
-    padding: 10px;
     cursor: pointer;
 }
 .deepmenu{
