@@ -17,12 +17,9 @@ import SingleProductPage from '../Pages/SingleProductPage';
 import Admin from '../Pages/Admin';
 import Signup from '../Pages/Signup';
 
-
-
 const MainRoutes = () => {
   return (
-      <div>
-        
+      <div>   
           <Routes>
               <Route path='/' element={<HomePage/>} />
               <Route path='/beauty&health' element={<BeautyHealth/>} />

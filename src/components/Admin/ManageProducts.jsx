@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 const ManageProducts = () => {
-  // const {isLoading,isError,data}=useSelector(store=>store.adminReducer);
+  // const {isLoading,isError,products}=useSelector(store=>store.AdminReducer);
   const dispatch=useDispatch();
   return(
     <div>

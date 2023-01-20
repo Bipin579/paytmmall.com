@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Footer.module.css";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import {
   AiFillApple,
   AiFillWindows,
@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
 
-    <Box background="#f4f4f4" border="1px solid white" w={{base: '100%', md: '100%', lg: '100%'}}>
+    <Box background="#f4f4f4" border="1px solid white" >
       <Box className={styles.f1}>
         <Text fontSize={{ base: '8px', md: '10px', lg: 'xs' }} align="left">
           Cashback would be added as Paytm Cash, which is One97 Communications
@@ -25,7 +25,7 @@ const Footer = () => {
         </Text>
       </Box>
       {/* ====================================ICONS PART =================================== */}
-      <Box className={styles.f2}>
+      <SimpleGrid className={styles.f2} columns={{base:1,md:2,lg:2}}>
         <Box className={styles.options}>
           <a href="">About Us</a>
           <a href="">Partner with us</a>
@@ -60,20 +60,21 @@ const Footer = () => {
             <AiFillYoutube />
           </Box>
         </Box>
-      </Box>
+      </SimpleGrid>
       {/* ======================================LOGOS PART========================================= */}
       <Box className={styles.p_logos}>
         <Box className={styles.logos}>
-          <Box>
+         
             <Box className={styles.first}>
-              <img
+              <Image
+                w={{base:'120px',md:'150px',lg:'200px'}}
                 src="https://www.pngmart.com/files/3/Major-Credit-Card-Logo-Transparent-Background.png"
-                alt=""
+                alt="Credit-Card-Logo"
               />
             </Box>
-          </Box>
-          <Box>
-            <Box>
+          <SimpleGrid columns={{base:1,md:2,lg:2}}>
+            <Box border='1px solid rgba(128, 128, 128, 0.39)' p='3px'>
+           
               <Image
                 w="50px"
                 src="https://paytmmall-clone.netlify.app/logo/mainLogo.png"
@@ -82,20 +83,23 @@ const Footer = () => {
               <Text fontSize="xs" mt="-15px" ml="55px">
                 Seller{" "}
               </Text>
-              <Text fontSize="xs" fontWeight="700">
+              <Text fontSize={{base:'xs',md:'sm',lg:'sm'}} fontWeight="700">
                 Become a Seller
               </Text>
             </Box>
-            <Box className={styles.P_wallet}>
-              <AiOutlineWallet color='#0987A0'/>
-              <Text fontSize="xs" mt="-19px" ml="-10px">
+            <Box className={styles.P_wallet} border='1px solid rgba(128, 128, 128, 0.39)' >
+               <AiOutlineWallet color='#0987A0'/>
+              <Text mt="-16px" fontSize="xs">
                 wallet{" "}
               </Text>
-              <Text fontSize="xs" fontWeight="700">
+             <Text  fontSize={{base:'xs',md:'sm',lg:'sm'}} fontWeight="700">
                 Payment services
               </Text>
+              
             </Box>
-          </Box>
+            </SimpleGrid>
+          
+         
         </Box>
       </Box>
       {/* ================================================DROPDOWN PART==================================== */}
@@ -110,7 +114,7 @@ const Footer = () => {
           From Electronics, Fashion to Cars: Buy Everything Online from the
           Convenience of Your Home from Paytm Mall
         </Text>
-        <Box className={styles.bottom}>
+        <SimpleGrid className={styles.bottom} columns={{base:3,md:5,lg:5}}>
           <Box>
             <Text textAlign="left">Electronics</Text>
             <IoMdArrowDropdown size="20px" />{" "}
@@ -159,9 +163,10 @@ const Footer = () => {
             <Text textAlign="left">Travel Cards</Text>
             <IoMdArrowDropdown size="20px" />
           </Box>
+           </SimpleGrid>
         </Box>
       </Box>
-    </Box>
+   
   );
 };
 

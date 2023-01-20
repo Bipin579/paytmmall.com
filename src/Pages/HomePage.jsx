@@ -3,50 +3,93 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { Carosel } from "../components/Carousel.jsx";
 
 const Homepage = () => {
+
+  let groceryBox = document.querySelector(".grocery-container");
+  
+  const groceryPrev = () => {
+    let width = groceryBox.clientWidth;
+    groceryBox.scrollLeft = groceryBox.scrollLeft - width;
+    console.log(width);
+  };
+
+  const groceryNext = () => {
+    let width = groceryBox.clientWidth;
+    groceryBox.scrollLeft = groceryBox.scrollLeft + width;
+    console.log(width);
+  };
+
   return (
-    <div>
+    <div id='main'>
       <div className="product-container">
         <Carosel />
       </div>
       <h1>Grocery & Home Furnishing</h1>
-      <Grid
-        className="shops"
-        templateColumns="repeat(4, 1fr)"
-        templateRows="600px"
-        gap={12}
-      >
-        <GridItem w="100%" h="10">
+      <div className="grocery">
+      <button className="groceryprebtn" onClick={groceryPrev}>
+        <p>&lt;</p>
+      </button>
+      <button className="grocerynextbtn" onClick={groceryNext}>
+        <p>&gt;</p>
+      </button>
+      <div className="grocery-container">
+        <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498479/1613247367528.png?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
           <h3>Big Bazaar</h3>
-        </GridItem>
-
-        <GridItem w="100%" h="10">
+        </div>
+        <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498482/1620737072141.png?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>Urban Ladder</h3>
-        </GridItem>
-
-        <GridItem w="100%" h="10">
+          <h3>Big Bazaar</h3>
+        </div>
+        <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498480/1620737097910.jpg?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>@Home</h3>
-        </GridItem>
-
-        <GridItem w="100%" h="10">
+          <h3>Big Bazaar</h3>
+        </div>
+        <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498484/1610566898069.jpg?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>More</h3>
-        </GridItem>
-      </Grid>
+          <h3>Big Bazaar</h3>
+        </div>
+        <div className="grocerycard">
+          <img
+            src="https://assetscdn1.paytm.com/images/catalog/view_item/498484/1610566898069.jpg?imwidth=414&impolicy=hq"
+            alt="Bazar"
+          />
+          <h3>@Home</h3>
+        </div>
+        <div className="grocerycard">
+          <img
+            src="https://assetscdn1.paytm.com/images/catalog/view_item/498485/1620737113562.png?imwidth=414&impolicy=hq"
+            alt="Bazar"
+          />
+          <h3>@Home</h3>
+        </div>
+        <div className="grocerycard">
+          <img
+            src="https://assetscdn1.paytm.com/images/catalog/view_item/498490/1610567023040.png?imwidth=414&impolicy=hq"
+            alt="Bazar"
+          />
+          <h3>@Home</h3>
+        </div>
+        <div className="grocerycard">
+          <img
+            src="https://assetscdn1.paytm.com/images/catalog/view_item/498486/1610567208285.png?imwidth=414&impolicy=hq"
+            alt="Bazar"
+          />
+          <h3>@Home</h3>
+        </div>
+      </div>
+    </div>
 
       <h1>Jewellery Brands</h1>
       <Grid
@@ -173,12 +216,16 @@ const Homepage = () => {
           shopping with cash on delivery (COD) option as & when needed.
         </p>
         <Grid
-          className="foot"
+          className="footbox"
           templateColumns="repeat(4, 1fr)"
           templateRows="300px"
           gap={10}
         >
           <GridItem w="100%" h="10">
+            <img
+              src="https://t4.ftcdn.net/jpg/01/25/83/03/240_F_125830316_m9Grtzjlt2I5Gp4qpDQq5G5BSXR5d9ZF.jpg"
+              alt="logo"
+            />
             <h4>24*7 Help</h4>
             <p>
               Need Help? Click Here. You can also talk to us on 0120 4606060 to
@@ -186,24 +233,37 @@ const Homepage = () => {
             </p>
           </GridItem>
           <GridItem w="100%" h="10">
-            <h4>24*7 Help</h4>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/1489/1489589.png"
+              alt="logo"
+            />
+            <h4>Paytm Trust</h4>
             <p>
-              Need Help? Click Here. You can also talk to us on 0120 4606060 to
-              resolve your query.
+              Your money is yours! All refunds come with no question asked
+              guarantee.
             </p>
           </GridItem>
           <GridItem w="100%" h="10">
-            <h4>24*7 Help</h4>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/8867/8867287.png"
+              alt="logo"
+            />
+            <h4>100% Assurance</h4>
             <p>
-              Need Help? Click Here. You can also talk to us on 0120 4606060 to
-              resolve your query.
+              At Paytm, we provide 100% assurance. If you have any issue, your
+              money is immediately refunded. Sit back and enjoy your shopping.
             </p>
           </GridItem>
           <GridItem w="100%" h="10">
-            <h4>24*7 Help</h4>
+            <img
+              src="https://t3.ftcdn.net/jpg/04/97/75/72/240_F_497757293_8Oir83ATiF90BG5gf8RJrip2zxf0FkCx.jpg"
+              alt="logo"
+            />
+            <h4>Paytm Mall Promise</h4>
             <p>
-              Need Help? Click Here. You can also talk to us on 0120 4606060 to
-              resolve your query.
+              Products with this tag are quality checked, and shipped the same
+              day from certified warehouses. So you get the right product,
+              faster.
             </p>
           </GridItem>
         </Grid>

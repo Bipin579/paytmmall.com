@@ -2,12 +2,18 @@ import {
   ADD_PRODUCT_FAILURE,
   ADD_PRODUCT_REQUEST,
   ADD_PRODUCT_SUCCESS,
+  DELETE_ADMIN_FAILURE,
+  DELETE_ADMIN_REQUEST,
+  DELETE_ADMIN_SUCCESS,
   DELETE_PRODUCT_FAILURE,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_USER_FAILURE,
   DELETE_USER_REQUEST,
   DELETE_USER_SUCCESS,
+  GET_ADMINLIST_FAILURE,
+  GET_ADMINLIST_REQUEST,
+  GET_ADMINLIST_SUCCESS,
   GET_PRODUCT_FAILURE,
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_SUCCESS,
@@ -19,7 +25,6 @@ import {
   UPDATE_PRODUCT_SUCCESS,
 } from "./actionTypes";
 import axios from "axios";
-
 const getProductRequest = () => ({ type: GET_PRODUCT_REQUEST });
 const getProductSuccess = (payload) => ({ type: GET_PRODUCT_SUCCESS, payload });
 const getProductFailure = () => ({ type: GET_PRODUCT_FAILURE });
@@ -47,7 +52,21 @@ const getUserListFailure = () => ({ type: GET_USERLIST_FAILURE });
 const deleteUserRequest = () => ({ type: DELETE_USER_REQUEST });
 const deleteUserSuccess = (payload) => ({ type: DELETE_USER_SUCCESS, payload });
 const deleteUserFailure = () => ({ type: DELETE_USER_FAILURE });
-
+const getAdminListRequest = () => ({ type: GET_ADMINLIST_REQUEST });
+const getAdminListSuccess = (payload) => ({
+  type: GET_ADMINLIST_SUCCESS,
+  payload,
+});
+const getAdminListFailure = () => ({ type: GET_ADMINLIST_FAILURE });
+const addAdminRequest = () => ({ type: ADD_PRODUCT_REQUEST });
+const addAdminSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
+const addAdminFailure = () => ({ type: ADD_PRODUCT_FAILURE });
+const deleteAdminRequest = () => ({ type: DELETE_ADMIN_REQUEST });
+const deleteAdminSuccess = (payload) => ({
+  type: DELETE_ADMIN_SUCCESS,
+  payload,
+});
+const deleteAdminFailure = () => ({ type: DELETE_ADMIN_FAILURE });
 export const getProducts = async (dispatch) => {
   dispatch(getProductRequest());
   try {
@@ -59,21 +78,18 @@ export const getProducts = async (dispatch) => {
     dispatch(getProductFailure());
   }
 };
-
 export const addProduct = (product) => async (dispatch) => {
   dispatch(addProductRequest());
   try {
     const { data } = await axios.post(
-      "https://paytmmallserver.onrender.com/product",
-      product
+      "https://paytmmallserver.onrender.com/product",product
     );
-    console.error(" data", data);
     dispatch(addProductSuccess(data));
+    return data;
   } catch (error) {
     dispatch(addProductFailure(error));
   }
 };
-
 export const deleteProduct = (id) => async (dispatch) => {
   dispatch(deleteProductRequest());
   try {
@@ -85,7 +101,6 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch(deleteProductFailure(error));
   }
 };
-
 export const updateProduct = (id, product) => async (dispatch) => {
   dispatch(updateProductRequest());
   try {
@@ -103,38 +118,60 @@ export const getUsersList = async (dispatch) => {
   dispatch(getUserListRequest());
   try {
     const { data } = await axios.get(
-      "https://paytmmallserver.onrender.com/users"
+      "https://mock-data-zsk0.onrender.com/users"
     );
     dispatch(getUserListSuccess(data));
   } catch (error) {
-    console.log("error", error);
     dispatch(getUserListFailure(error));
   }
 };
 
-export const addUser = (user) => async (dispatch) => {
-  try {
-    const { data } = await axios.post(
-      "https://paytmmallserver.onrender.com/users",
-      user
-    );
-    console.log(data);
-    // dispatch()
-  } catch (error) {
-    // dispatch()
-    console.log("error", error);
-  }
-};
-
-export const deleteUser = (email) => async (dispatch) => {
+export const deleteUser = (id) => async (dispatch) => {
   dispatch(deleteUserRequest());
   try {
-    const { data } = await axios.delete(
-      `https://paytmmallserver.onrender.com/users?email=${email}`
+    let res = await axios.delete(
+      `https://mock-data-zsk0.onrender.com/users/${id}`
     );
-    console.log("data", data);
-    dispatch(deleteUserSuccess(data.email));
+    dispatch(deleteUserSuccess(id));
+    return res;
   } catch (error) {
     dispatch(deleteUserFailure("error", error));
+  }
+};
+export const getAdminList = async (dispatch) => {
+  dispatch(getAdminListRequest());
+  try {
+    const { data } = await axios.get(
+      "https://mock-data-zsk0.onrender.com/admins"
+    );
+    console.log(data);
+    dispatch(getAdminListSuccess(data));
+  } catch (error) {
+    dispatch(getAdminListFailure(error));
+  }
+};
+export const addAdmin = (admin) => async (dispatch) => {
+  dispatch(addAdminRequest());
+  try {
+    let { data } = await axios.post(
+      "https://mock-data-zsk0.onrender.com/admins",
+      admin
+    );
+    dispatch(addAdminSuccess(data));
+    return data;
+  } catch (error) {
+    dispatch(addAdminFailure(error));
+  }
+};
+export const deleteAdmin = (id) => async (dispatch) => {
+  dispatch(deleteAdminRequest());
+  try {
+    let { data } = await axios.delete(
+      `https://mock-data-zsk0.onrender.com/admins/${id}`
+    );
+    dispatch(deleteAdminSuccess(id));
+    return data;
+  } catch (error) {
+    dispatch(deleteAdminFailure(error));
   }
 };

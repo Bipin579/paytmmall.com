@@ -14,6 +14,12 @@ import {
   DELETE_USER_REQUEST,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
+  ADD_ADMIN_REQUEST,
+  ADD_ADMIN_SUCCESS,
+  ADD_ADMIN_FAILURE,
+  GET_ADMINLIST_REQUEST,
+  GET_ADMINLIST_SUCCESS,
+  GET_ADMINLIST_FAILURE,
 } from "./actionTypes";
 
 const inisitalState = {
@@ -27,12 +33,16 @@ const inisitalState = {
   isLoadingProductUpdate: false,
   isErrorProductUpdate: false,
   orders: [],
-  admins: [],
   users: [],
   isLoadingUserList: false,
   isErrorUserList: false,
   isLoadingUserDelete: false,
   isErrorUserDelete: false,
+  admins: [],
+  isLoadingAdminList: false,
+  isErrorAdminList: false,
+  isLoadingAdminAdd: false,
+  isErrorAdminAdd: false,
 };
 
 const reducer = (state = inisitalState, { type, payload }) => {
@@ -64,13 +74,22 @@ const reducer = (state = inisitalState, { type, payload }) => {
     case DELETE_USER_REQUEST:
       return { ...state, isLoadingUserDelete: true };
     case DELETE_USER_SUCCESS:
-      return {
-        ...state,
-        isLoadingUserDelete: false,
-        users: state.users.filter((email) => email !== payload),
+      return {...state,isLoadingUserDelete: false,users:state.users.filter((user) => user.id !== payload)
       };
     case DELETE_USER_FAILURE:
       return { ...state, isLoadingUserDelete: false, isErrorUserDelete: true };
+    case ADD_ADMIN_REQUEST:
+      return { ...state, isLoadingAdminAdd: true };
+    case ADD_ADMIN_SUCCESS:
+      return { ...state, isLoadingAdminAdd: false, products: [...state.admins,payload] };
+    case ADD_ADMIN_FAILURE:
+      return { ...state, isLoadingAdminAdd: false, isErrorAdminAdd: true }; 
+    case GET_ADMINLIST_REQUEST:
+      return { ...state, isLoadingAdminList: true };
+    case GET_ADMINLIST_SUCCESS:
+      return { ...state, isLoadingAdminList: false, admins: payload };
+    case GET_ADMINLIST_FAILURE:
+      return { ...state, isLoadingAdminList: false, isErrorAdminList: true };  
     default:
       return state;
   }
