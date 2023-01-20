@@ -1,13 +1,17 @@
 
 import './App.css';
 import Footer from './components/Footer';
-//import MainRoutes from './Routes/MainRoutes';
+import FurnitureElectronics from './Pages/FurnitureElectronics';
+import Jwellery from './Pages/Jwellery';
+import MainRoutes from './Routes/MainRoutes';
 
 function App() {
   return (
     <div className="App">
       {/* <MainRoutes /> */}
-      <Footer/>
+   {/* <Jwellery /> */}
+   <FurnitureElectronics />
+      {/* <Footer/> */}
     </div>
   );
 }
