@@ -116,13 +116,13 @@
     z-index:1000;
    
    }
-  .first:hover .localWarehouse {
+  /* .first:hover .localWarehouse {
   display: block;
   position: absolute;
  
-  background-color: white;
+  
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
+} */
 .deepmenu p{
     cursor: pointer;
 }
