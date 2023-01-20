@@ -1,33 +1,43 @@
 import {
-  GET_LOGIN_FAILURE,
-  GET_LOGIN_REQUEST,
-  GET_LOGIN_SUCCESS,
+  GET_USER_FAILURE,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
   POST_SIGNIN_FAILURE,
   POST_SIGNIN_REQUEST,
   POST_SIGNIN_SUCCESS,
+  SET_LOGIN_REQUEST,
+  SET_LOGOUT_REQUEST,
 } from "./actionTypes";
+
 
 const initialState = {
   users: [],
-  isAuth: false,
+  isAuth: localStorage.getItem("isAuth") || false,
   isLoading: false,
   isError: false,
 };
+
+
+
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case POST_SIGNIN_REQUEST:
       return { ...state, isLoading: true };
     case POST_SIGNIN_SUCCESS:
-      return { ...state, isLoading: false, isAuth: true, isError: false };
+      return { ...state, isLoading: false, isError: false };
     case POST_SIGNIN_FAILURE:
       return { ...state, isLoading: false, isError: true };
-    case GET_LOGIN_REQUEST:
+    case GET_USER_REQUEST:
       return { ...state, isLoading: true };
-    case GET_LOGIN_SUCCESS:
-      return { ...state, isLoading: false, isAuth: true, isError: false , users: payload};
-    case GET_LOGIN_FAILURE:
+    case GET_USER_SUCCESS:
+      return { ...state, isLoading: false, isError: false, users: payload };
+    case GET_USER_FAILURE:
       return { ...state, isLoading: false, isError: true };
+    case SET_LOGIN_REQUEST:
+      return { ...state, isAuth:true};
+    case SET_LOGOUT_REQUEST:
+      return { ...state, isAuth: false };
     default:
       return state;
   }
