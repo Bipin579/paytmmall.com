@@ -47,6 +47,15 @@ const getUserListFailure = () => ({ type: GET_USERLIST_FAILURE });
 const deleteUserRequest = () => ({ type: DELETE_USER_REQUEST });
 const deleteUserSuccess = (payload) => ({ type: DELETE_USER_SUCCESS, payload });
 const deleteUserFailure = () => ({ type: DELETE_USER_FAILURE });
+const getAdminListRequest = () => ({ type: GET_ADMINLIST_REQUEST });
+const getAdminListSuccess = (payload) => ({ type: GET_ADMINLIST_SUCCESS, payload });
+const getAdminListFailure = () => ({ type: GET_ADMINLIST_FAILURE});
+const addAdminRequest = () => ({ type: ADD_PRODUCT_REQUEST });
+const addAdminSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
+const addAdminFailure = () => ({ type: ADD_PRODUCT_FAILURE });
+const deleteAdminRequest = () => ({ type: DELETE_ADMIN_REQUEST });
+const deleteAdminSuccess = (payload) => ({ type: DELETE_ADMIN_SUCCESS, payload });
+const deleteAdminFailure = () => ({ type: DELETE_ADMIN_FAILURE });
 
 export const getProducts = async (dispatch) => {
   dispatch(getProductRequest());

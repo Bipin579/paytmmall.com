@@ -1,4 +1,3 @@
-import React from 'react'
 import Admin_Sidebar from '../components/Admin/Admin_Sidebar';
 
 const Admin = () => {
