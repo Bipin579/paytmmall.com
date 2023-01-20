@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
 
-    <Box w={{ base: "200%", md: "180%", lg: "100%" }} >
+    <Box w={{ base: "100%", md: "100%", lg: "100%" }} >
       <Box className="paytm_mall_logo">
         <Link to='/'>
           <Image

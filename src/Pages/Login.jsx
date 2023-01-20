@@ -1,82 +1,3 @@
-// import React from "react";
-// import {
-//   Box,
-//   Button,
-//   FormControl,
-//   FormLabel,
-//   Input,
-//   Text,
-// } from "@chakra-ui/react";
-// import { useState } from "react";
-// const Login = () => {
-//   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
-
-//   const handleChange = (event) => {
-//     setFormData({ ...formData, [event.target.name]: event.target.value });
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     // Do something with the form data here (e.g. send it to an API)
-//     console.log(formData);
-//   }
-//   return (
-//     <Box m="auto" bgColor={"#EBF7FC"}>
-//       <Box
-//         display="flex"
-//         flexDirection={["column", "column", "column", "row", "row", "row"]}
-//         colGap={10}
-//         maxW={"5xl"}
-//         m="auto"
-
-//       >
-//         <Box
-//           width={["full", "full", "full", "full", "50%", "50%"]}
-//           display="flex"
-
-//         >
-//           <Text fontSize={"2xl"} fontWeight="bold" textAlign={"center"}>
-//             Login
-//           </Text>
-//           <Box
-//             p={10}
-//             display="flex"
-//             flexDir={"row"}
-//             justifyContent="center"
-//             m={"auto"}
-//           >
-//             <form onSubmit={handleSubmit}>
-//               <FormControl>
-//                 <FormLabel htmlFor="name">Name</FormLabel>
-//                 <Input id="name" name="name" borderColor={"red"} onChange={handleChange} />
-//               </FormControl>
-//               <FormControl>
-//                 <FormLabel htmlFor="email">Email</FormLabel>
-//                 <Input id="email" name="email" onChange={handleChange} />
-//               </FormControl>
-//               <FormControl>
-//                 <FormLabel htmlFor="password">Password</FormLabel>
-//                 <Input
-//                   id="password"
-//                   name="password"
-//                   type="password"
-//                   onChange={handleChange}
-//                 />
-//               </FormControl>
-//               <Button type="submit" variantColor="teal">
-//                 Submit
-//               </Button>
-//             </form>
-//           </Box>
-//         </Box>
-//         <Box width={["full", "full", "full", "full", "50%", "50%"]}></Box>
-//       </Box>
-//     </Box>
-//   );
-// };
-
-// export default Login;
-
 import {
   Flex,
   Box,
@@ -85,53 +6,115 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
-  useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
+import { Link, Navigate } from "react-router-dom";
 
-export default function Login() {
-  return (
-    <Box
-      display="flex"
-      flexDirection={["column", "column", "column", "row", "row", "row"]}
-      colGap={10}
-      maxW={"5xl"}
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUsers, setLogin } from "../Redux/Auth/action";
+
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const toast = useToast();
+  const dispatch = useDispatch();
+  let users = useSelector((store) => store.AuthReducer.users);
+  const loading = useSelector((store) => store.AuthReducer.isLoading);
+  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+  localStorage.setItem("isAuth", isAuth);
+
+  useEffect(() => {
+    dispatch(getUsers);
+  }, []);
+
+  console.log(users);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let check = users.some((el) => {
+      return el.email === email && el.password === password;
+    });
+    // console.log(check);
+    if (check) {
+      toast({
+        title: "Login Successfully.",
+        description: ` Welcome ${email}`,
+        status: "success",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+      dispatch(setLogin);
+    } else {
+      toast({
+        title: "Wrong Creadentials.",
+        description: `Please register ${email}`,
+        status: "error",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+    }
+  };
+  console.log(isAuth);
+  // if (isAuth) {
+  //   return (
+  //     <>
+  //       <Navigate to={"/"} />
+  //     </>
+  //   )
+  // }
+
+  return loading ? (
+    <Box>...loading</Box>
+  ) : (
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={"gray.50"}
       m="auto"
     >
-      <Flex
-        width={["full", "full", "full", "full", "50%", "50%"]}
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-        bg={useColorModeValue("gray.50", "gray.800")}
-      >
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-          <Stack align={"center"}>
-            <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-            <Text fontSize={"lg"} color={"gray.600"}>
-              to enjoy all of our cool <Link color={"blue.400"}>features</Link>{" "}
-              ✌️
-            </Text>
-          </Stack>
-          <Box
-            rounded={"lg"}
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow={"lg"}
-            p={8}
-          >
-            <Stack spacing={4}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading color={"#002E6E"} fontSize={"4xl"}>
+            Log in to your account
+          </Heading>
+        </Stack>
+        <Box rounded={"lg"} bg={"gray.50"} boxShadow={"lg"} p={8}>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={2}>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input
+                  focusBorderColor="#002E6E"
+                  borderColor={"#002E6E"}
+                  type="email"
+                  name="email"
+                  placeholder="Enter @gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" />
+                <Input
+                  focusBorderColor="#002E6E"
+                  borderColor={"#002E6E"}
+                  placeholder="Enter pass ***"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </FormControl>
-              <Stack spacing={10}>
+              <Stack spacing={5}>
                 <Stack
                   direction={{ base: "column", sm: "row" }}
                   align={"start"}
@@ -141,20 +124,30 @@ export default function Login() {
                   <Link color={"blue.400"}>Forgot password?</Link>
                 </Stack>
                 <Button
-                  bg={"blue.400"}
+                  type="submit"
+                  bg={"blue.500"}
                   color={"white"}
                   _hover={{
-                    bg: "blue.500",
+                    bg: "blue.600",
                   }}
                 >
                   Sign in
                 </Button>
+                <Box display={"flex"} justifyContent="center">
+                  <Text as={"span"} textAlign={"center"}>
+                    Dont have Account ?{" "}
+                  </Text>
+                  <Text color="#002E6E" fontWeight="600" as={"span"}>
+                    <Link to={"/signup"}>Sign Up</Link>
+                  </Text>
+                </Box>
               </Stack>
             </Stack>
-          </Box>
-        </Stack>
-      </Flex>
-                  
-    </Box>
+          </form>
+        </Box>
+      </Stack>
+    </Flex>
   );
 }
+
+export default Login;

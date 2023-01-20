@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
 
-    <Box background="#f4f4f4" border="1px solid white" w={{base: '200%', md: '180%', lg: '100%'}}>
+    <Box background="#f4f4f4" border="1px solid white" w={{base: '100%', md: '100%', lg: '100%'}}>
       <Box className={styles.f1}>
         <Text fontSize={{ base: '8px', md: '10px', lg: 'xs' }} align="left">
           Cashback would be added as Paytm Cash, which is One97 Communications

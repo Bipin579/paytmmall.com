@@ -15,7 +15,8 @@ import Cart from '../Pages/Cart';
 import Orders from '../Pages/Orders';
 import SingleProductPage from '../Pages/SingleProductPage';
 import Admin from '../Pages/Admin';
-import Navbar from '../components/Navbar';
+import Signup from '../Pages/Signup';
+
 
 
 const MainRoutes = () => {
@@ -37,6 +38,7 @@ const MainRoutes = () => {
               <Route path='/orders' element={<Orders/>} />
               <Route path='/product:id' element={<SingleProductPage/>} />
               <Route path='/admin' element={<Admin/>} />
+              <Route path='/signup' element={<Signup/>} />
           </Routes>
     </div>
   )
