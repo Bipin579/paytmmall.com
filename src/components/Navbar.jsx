@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -24,7 +23,7 @@ const Navbar = () => {
 
   return (
 
-    <Box w={{ base: "200%", md: "180%", lg: "100%" }} >
+    <Box>
       <Box className="paytm_mall_logo">
         <Link to='/'>
           <Image
@@ -44,21 +43,21 @@ const Navbar = () => {
         zIndex="1000"
        
       >
-        <Box className="navLeft">
+        <Box className="navLeft" gap={{base:'4px',sm:'10px',md:'15px',lg:'20px'}}>
           <Box className="active" w={{ base: "40%", md: "18%", lg: "20%" }}>
-            <Box className="nav_category">
+            <Box className="nav_category" p={{base:'1px',sm:'4px',md:'6px',lg:'10px'}}>
+             
+                <GiHamburgerMenu color="red"/>
+              
               <Box>
-                <GiHamburgerMenu color="red" />
-              </Box>
-              <Box>
-                <Text as='b' fontSize={{ base: "xs", md: "sm", lg: "sm" }}>
+                <Text as='b' fontSize={{ base: "6px", md: "12px", lg: "14px" }}>
                   Shop By Category
                 </Text>
               </Box>
             </Box>
 
             <Box className="deepmenu">
-              <ul style={{ display: "inline-block" }} className="menu" />
+              <ul style={{ display: "inline-block" }} />
               <Box className="first">
                 <Box
                   ml="-10px"
@@ -117,7 +116,7 @@ const Navbar = () => {
               </Box>
             </Box>
           </Box>
-          <Box className="options" w={{ base: "50%", md: "77%", lg: "82%" }}>
+          <Box className="options" w={{ base: "50%", md: "77%", lg: "82%" }}  p={{base:'2px',sm:'4px',md:'6px',lg:'10px'}}>
             <input
               w={{ base: "40%", md: "40%", lg: "100%" }}
               className="searchBar"
@@ -136,24 +135,25 @@ const Navbar = () => {
          
         >
           <Box  className="order" w={{ base: "20%",md:'30%',lg:'33%' }}>
-            <Image src={list} alt="order_list_logo" />
-            <Text fontSize={{ base: "10px", sm: "md", lg: "md" }}>
+            <Image src={list} alt="order_list_logo" w={{ base: "10px",md:'20px',lg:'25px' }}/>
+            <Text fontSize={{ base: "6px", sm: "md", lg: "md" }}>
               My Orders
             </Text>
           </Box>
 
           <Box   className="cart" w={{ base: "20%",md:'30%',lg:'33%' }}>
-            <Image width="30px" src={cartbag} alt="cart_logo" />
-            <Text fontSize={{ base: "10px", md: "md", lg: "md" }}>
+            <Image src={cartbag} alt="cart_logo" w={{ base: "10px",md:'20px',lg:'25px' }}/>
+            <Text fontSize={{ base: "6px", md: "md", lg: "md" }}>
               No Items in the Bag
             </Text>
           </Box>
           <Box  className="user" w={{ base: "33%", md:'30%',lg:'33%'}}>
             <Image
+              w={{ base: "10px",md:'20px',lg:'20px' }}
               src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
               alt=""
             />
-            <Text fontSize={{ base: "10px", sm: "md", lg: "md" }}>
+            <Text fontSize={{ base: "6px", sm: "md", lg: "md" }}>
               Login/SignUp
             </Text>
           </Box>
