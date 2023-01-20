@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import  { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Fashion = () => {
   const [fashionData,setFashionData] =useState([])
