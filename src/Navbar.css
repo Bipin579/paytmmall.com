@@ -1,0 +1,130 @@
+.paytm_mall_logo {
+  width: 100px;
+  margin: auto;
+  margin-top: 2vh;
+}
+.navbar {
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items: center;
+  margin-top: 1vh;
+}
+.navbar a {
+  text-decoration: none;
+  color: #252525;
+}
+.navLeft {
+  width: 66%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav_options {
+  font-weight: bold;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+  align-items: center;
+  border: 1px solid #cecece;
+  border-radius: 2px;
+  padding: 12px;
+}
+.nav_options img {
+  height: 18px;
+}
+.nav_options a {
+  margin-bottom: -16px;
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #cecece;
+  border-radius: 2px;
+  padding: 10px;
+ 
+}
+.options input {
+  width: 95%;
+  border: none;
+  outline: 0;
+}
+.options img {
+  height: 18px;
+  margin: auto;
+}
+
+.cart img,
+.order img,
+.user img {
+  margin: auto;
+  width: 25px;
+}
+.order,
+.cart,
+.user {
+  width: 22%;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.userOptions {
+  width: 26%;
+  display: flex;
+  justify-content: space-around;
+  right: 0px;
+  top: 37px;
+}
+.nav_right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  right: 12px;
+  padding: 2px;
+  background-color: white;
+}
+.nav_right div {
+  width: 28%;
+}
+.searchBar{
+    font-size: small;
+}
+/* categories */
+.nav_category{
+    border: 1px solid rgba(128, 128, 128, 0.473);
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.deepmenu{
+    display: none;
+}
+.active:hover .deepmenu{
+    display: block;
+    position:absolute;
+    text-align: left;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+    color : black;
+    padding: 6px;
+    z-index:1000;
+   
+   }
+  .first:hover .localWarehouse {
+  display: block;
+  position: absolute;
+ 
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.deepmenu p{
+    cursor: pointer;
+}
