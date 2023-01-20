@@ -21,8 +21,8 @@ export const loginRequestAction = () => {
     return { type: GET_LOGIN_REQUEST };
 }
 
-export const loginSuccessAction = () => {
-    return { type: GET_LOGIN_SUCCESS };
+export const loginSuccessAction = (payload) => {
+    return { type: GET_LOGIN_SUCCESS, payload };
 }
 
 export const loginFailureAction = () => {
@@ -50,3 +50,8 @@ export const login = (dispatch) => {
         dispatch(loginRequestAction());
     })
 }
+
+
+// const addCart = () => {
+    
+// }
