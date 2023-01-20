@@ -5,9 +5,6 @@ import {
   DELETE_PRODUCT_FAILURE,
   ADD_PRODUCT_FAILURE,
   ADD_PRODUCT_REQUEST,
-  GET_PRODUCT_REQUEST,
-  GET_PRODUCT_SUCCESS,
-  GET_PRODUCT_FAILURE,
   GET_USERLIST_REQUEST,
   GET_USERLIST_SUCCESS,
   GET_USERLIST_FAILURE,
@@ -20,6 +17,9 @@ import {
   GET_ADMINLIST_REQUEST,
   GET_ADMINLIST_SUCCESS,
   GET_ADMINLIST_FAILURE,
+  DELETE_ADMIN_REQUEST,
+  DELETE_ADMIN_SUCCESS,
+  DELETE_ADMIN_FAILURE,
 } from "./actionTypes";
 
 const inisitalState = {
@@ -47,12 +47,6 @@ const inisitalState = {
 
 const reducer = (state = inisitalState, { type, payload }) => {
   switch (type) {
-    case GET_PRODUCT_REQUEST:
-      return { ...state, isLoading: true };
-    case GET_PRODUCT_SUCCESS:
-      return { ...state, isLoading: false, products: payload };
-    case GET_PRODUCT_FAILURE:
-      return { ...state, isLoading: false, isError: true };
     case ADD_PRODUCT_REQUEST:
       return { ...state, isLoadingADD: true };
     case ADD_PRODUCT_SUCCESS:
@@ -90,6 +84,13 @@ const reducer = (state = inisitalState, { type, payload }) => {
       return { ...state, isLoadingAdminList: false, admins: payload };
     case GET_ADMINLIST_FAILURE:
       return { ...state, isLoadingAdminList: false, isErrorAdminList: true };  
+    case DELETE_ADMIN_REQUEST:
+      return { ...state, isLoadingAdminDelete: true };
+    case DELETE_ADMIN_SUCCESS:
+      return {...state,isLoadingAdminDelete: false,admins:state.admins.filter((admin) => admin.id !== payload)
+      };
+    case DELETE_ADMIN_FAILURE:
+      return { ...state, isLoadingAdminDelete: false, isErrorAdminDelete: true };
     default:
       return state;
   }

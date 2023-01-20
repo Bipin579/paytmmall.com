@@ -10,12 +10,12 @@ import AddProducts from './AddProducts';
 import AddAdmins from './AddAdmins';
 
 const LinkItems = [
-    { name: 'Dashboard', compName: 'Dashboard', icon: FiHome },
-    { name: 'Add Products', compName: 'AddProducts', icon: FiPlus },
-    { name: 'Manage Products', compName: 'ManageProducts', icon: FiCompass },
-    { name: 'Manage Orders', compName: 'ManageOrders', icon: FiShoppingCart },
-    { name: 'Add Admins', compName: 'AddAdmins', icon: FiPlus },
-    { name: 'Manage Admins', compName: 'ManageAdmins', icon: FiUsers }
+    { name: 'Dashboard', compName: 'Dashboard',heading:'Dashboard', icon: FiHome },
+    { name: 'Add Products', compName: 'AddProducts',heading:'Add Products', icon: FiPlus },
+    { name: 'Manage Products', compName: 'ManageProducts',heading:'Manage Products', icon: FiCompass },
+    { name: 'Manage Orders', compName: 'ManageOrders',heading:'Manage Products', icon: FiShoppingCart },
+    { name: 'Add Admins', compName: 'AddAdmins',heading:'Add Admins ', icon: FiPlus },
+    { name: 'Manage Admins', compName: 'ManageAdmins',heading:'Manage Admins', icon: FiUsers }
 ];
 
 function SidebarWithHeader({ children }) {
@@ -77,7 +77,8 @@ function SidebarWithHeader({ children }) {
                 </Drawer>
                 {/* mobilenav */}
                 <MobileNav onOpen={onOpen} />
-                <Flex className='main-content' justifyContent={'center'}  >
+                <Flex className='main-content' justifyContent={'center'} ml='100'  >
+                    <h2>{}</h2>
                     {componentChange()}
                 </Flex>
                 <Box ml={{ base: 0, md: 60 }} p="4">{children}</Box>

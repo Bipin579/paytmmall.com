@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdmin, getAdminList } from '../../Redux/Admin/action';
-import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast} from '@chakra-ui/react'
+import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast,Image} from '@chakra-ui/react'
 import {FiUserX} from 'react-icons/fi';
 
 const ManageAdmins = () => {
@@ -16,7 +16,7 @@ const ManageAdmins = () => {
         title: 'Admin Deleted',
         description: `${admin.name} has been deleted successfully`,
         status: 'success',
-        duration: 6000,
+        duration: 4000,
         isClosable: true,
       })
     } catch (error) {
@@ -35,7 +35,7 @@ const ManageAdmins = () => {
    }, []);
   return (
     <div>
-      <Heading size='md'>Manage Users</Heading>
+      <Heading size='md'>Manage Admins</Heading>
       {isLoadingAdminList && <h2>Loading...</h2>}
       {isErrorAdminList && <h2>Error Occured while getting Admin list</h2>}
         <div>
@@ -44,21 +44,21 @@ const ManageAdmins = () => {
           <Table variant='striped' colorScheme='teal'>
             <Thead>
               <Tr>
-                <Th>User</Th>
-                <Th isNumeric>Orders</Th>
-                <Th>Cart</Th>
-                <Th>Total</Th>
-                <Th>Profilt</Th>
+                <Th>Photo</Th>
+                <Th>Name</Th>
+                <Th>Email</Th>
+                <Th>Contact No.</Th>
+                <Th>Role</Th>
                 <Th>Delete</Th>
               </Tr>
             </Thead>
             <Tbody>
               {admins.map(admin=><Tr key={admin.id}>
+                <Td><Image src={admin.image} alt={admin.name} boxSize='90px' borderRadius='full' /></Td>
                 <Td>{admin.name}</Td>
-                <Td isNumeric>{admin.orders=0}</Td>
-                <Td>{admin.cart=0}</Td>
-                <Td isNumeric>{'₹'+300}</Td>
-                <Td isNumeric>{'₹'+100}</Td>
+                <Td>{admin.email}</Td>
+                <Td>{admin.contactNo}</Td>
+                <Td>{admin.role}</Td>
                 <Td><IconButton aria-label='Delete database' onClick={()=>handleDelete(admin)} icon={<FiUserX/>}/></Td>
               </Tr>)}
             </Tbody>

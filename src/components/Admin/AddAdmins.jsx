@@ -5,7 +5,7 @@ import { addAdmin } from "../../Redux/Admin/action";
 
 const AddAdmins = () => {
   const dispatch = useDispatch();
-  const initForm = { name: '', email: '', password: '', role: '',image: ''}
+  const initForm = { name: '', email: '', password: '', role: '',image: '',contactNo:''}
   const toast = useToast();
   const [form, setForm] = useState(initForm);
 
@@ -48,7 +48,9 @@ const AddAdmins = () => {
           <Input type='url' name='image' id='image' background='#fff' onChange={formChangeHandler} value={form.image} />
           <FormLabel>Admin Email</FormLabel>
           <Input type='email' name='email' id='email' background='#fff' onChange={formChangeHandler} value={form.email} />
-          <FormLabel>Admin Password</FormLabel>
+          <FormLabel>Admin Contact No.</FormLabel>
+          <Input type='number' name='contactNo' id='contactNo' background='#fff' onChange={formChangeHandler} value={form.contactNo} />
+          <FormLabel>Admin Password</FormLabel>         
           <Input type='password' name='password' id='passoword' background='#fff' onChange={formChangeHandler} value={form.password} />
           <FormLabel>Admin Category</FormLabel>
           {/* I can also pass defaultValue to Select */}
