@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect, useRef} from "react";
 import "../Navbar.css";
-import { Box, Text, Image, Flex, VStack } from "@chakra-ui/react";
+import { Box, Text, Image, Flex, VStack, InputGroup, Input } from "@chakra-ui/react";
 import cartbag from "./cartbag.png";
 import list from "./list.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import image from '../Utils/image.png';
 import menu from '../Utils/menu.png';
 import search from '../Utils/search.png';
-
+import {BiSearch} from 'react-icons/bi';
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
 
@@ -20,7 +20,47 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", checkScroll);
 
+// set Debouncing in input tag
 
+const url = `https://paytmmallserver.onrender.com/product`
+const ref = useRef(null)
+const [debounceDiv, setDebounceDiv] = useState(false)
+const [data, setData] = useState([])
+const [searchData, setSearchData] = useState("");
+useEffect(()=>{
+  fetchData(searchData);
+},[searchData]);
+const fetchData=(searchValue)=>{
+  fetch(`${url}?_limit=5&q=${searchValue}`)
+  .then((res)=>res.json())
+  .then((res)=>{
+    setData(res)
+    console.log( " debounce data ",res);
+  })
+}
+
+const debounce = (fn, timeout)=>{
+  let timerid;
+  return ()=>{
+    clearTimeout(timerid)
+    timerid = setTimeout(() => {
+      fn()
+    }, timeout);
+  }
+}
+const handleinput = debounce(()=>{
+  const val = ref.current.value
+ 
+  setDebounceDiv(true);
+  setSearchData(val);
+}, 1000);
+
+window.addEventListener("click",(e)=>{
+ 
+  if(e.target.id!=='13'){
+    setDebounceDiv(false);
+  }
+})
 
   return (
 
@@ -117,15 +157,65 @@ const Navbar = () => {
               </Box>
             </Box>
           </Box>
-          <Box className="options" w={{ base: "50%", md: "77%", lg: "82%" }}  p={{base:'0px',sm:'4px',md:'6px',lg:'10px'}}>
-            <input
-              w={{ base: "40%", md: "40%", lg: "100%" }}
-              className="searchBar"
-              type="text"
-              placeholder="Search for a Product, Brand or Category"
-            />
+          {/* ==================================INPUT BOX======================================== */}
+
+          <Box className="options" w={{ base: "50%", md: "77%", lg: "82%" }} p={{base:'0px',sm:'4px',md:'4px',lg:'4px'}}
+           >
            
-            <Image src={search} alt="" color="red" w={{ base: "8px",md:'15px',lg:'18px' }}/>
+           {/* use debouncing   */}
+           <Box w="100%">
+            <InputGroup>
+              <input
+               
+                w={{ base: "40%", md: "40%", lg: "100%" }}
+                className="searchBar"
+                type="text"
+                placeholder="Search for a Product, Brand or Category"
+                h="38px"
+                fontSize="14px"
+                ref={ref}
+                onInput={handleinput}
+                id='13'
+              />
+              
+            </InputGroup>
+            <Box
+              display={debounceDiv?"":"none"}
+              className='debouncing-item'
+            >
+              {
+                data.map((item, index)=>(
+                  <Box key={index} w='100%'>
+                    <NavLink to={`/product/${item.id}`}>
+                      <Flex
+                       bg='white'
+                       gap='2' 
+                       p='10px 25px' 
+                       m='10px 0'
+                      align='center'
+                      cursor='pointer'
+                      _hover={{bg:"#F5F8FF"}}
+                    
+                      >
+                        <Box>
+                          <Image w='50px' h='50px' src=
+                          {item.img}
+                          
+                          />
+                        </Box>
+                        <Box color={'#212121'}
+                        >
+                          {item.description}
+                         
+                        </Box>
+                      </Flex>
+                    </NavLink>
+                  </Box>
+                ))
+              }
+            </Box>
+          </Box>
+          <Box m='10px'>  <BiSearch color='red'/></Box>
 
           </Box>
         </Box>

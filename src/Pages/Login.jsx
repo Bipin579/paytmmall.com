@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUsers, setLogin } from "../Redux/Auth/action";
+import Loading from "../components/Loading";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -72,7 +73,7 @@ function Login() {
 
 
   return loading ? (
-    <Box>...loading</Box>
+    <Loading />
   ) : (
     <Flex
       minH={"100vh"}

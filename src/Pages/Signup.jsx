@@ -15,6 +15,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, signup } from "../Redux/Auth/action";
+import Loading from "../components/Loading";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -82,7 +83,7 @@ function Signup() {
 
   
 
-  return loading?<Box>...loading</Box>:( 
+  return loading?<Loading />:( 
       <>
           
       <Flex

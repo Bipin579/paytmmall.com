@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.hoverToIncreaseWidth{
+  transition: 500ms ease-in-out;
+}
+.hoverToIncreaseWidth:hover{
+ transform: scale(1.5);
+ cursor: pointer;
+  }
+
