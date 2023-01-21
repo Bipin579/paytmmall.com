@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../Footer.module.css";
 import { Box, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import paytmmall from '../Utils/paytmmall.png';
 import {
   AiFillApple,
   AiFillWindows,
@@ -77,7 +78,7 @@ const Footer = () => {
            
               <Image
                 w="50px"
-                src="https://paytmmall-clone.netlify.app/logo/mainLogo.png"
+                src={paytmmall}
                 alt=""
               />
               <Text fontSize="xs" mt="-15px" ml="55px">
