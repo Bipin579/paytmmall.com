@@ -1,11 +1,14 @@
+
+.satyam{
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+}
 .product-carousel {
-    position: relative;
-    overflow: hidden;
-    padding: 26px;
-    padding: 0 10px;
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+  padding: 0 10px;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
   }
   
   .pre-btn,
@@ -14,9 +17,8 @@
     width: 60px;
     height: auto;
     position: absolute;
-    top: 5%;
+    top: 35.5%;
     display: flex;
-    z-index: 10;
     background-color: rgba(0, 0, 0, 0);
   }
   
@@ -24,26 +26,17 @@
     right: 0;
   }
   
-  .next-btn p,
-  .pre-btn p {
-    font-size: 50px;
-    background-color: rgba(255, 255, 255, 0.436);
-    box-shadow: 0px 0px 10px 1px black;
-    border-radius: 10px;
+  .next-btn h1,
+  .pre-btn h1 {
     color: rgb(0, 0, 0);
-    width: 50px;
-    height: 80px;
     cursor: pointer;
   }
   /* ------------------------------ */
   .product-carousel2 {
-    position: relative;
-    overflow: hidden;
-    padding: 26px;
     padding: 0 10px;
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
   }
   
   .pre-btn2,
@@ -52,9 +45,8 @@
     width: 60px;
     height: auto;
     position: absolute;
-    top: 11%;
+    top: 28%;
     display: flex;
-    z-index: 10;
     background-color: rgba(0, 0, 0, 0);
   }
   
@@ -62,27 +54,18 @@
     right: 0;
   }
   
-  .next-btn2 p,
-  .pre-btn2 p {
-    font-size: 50px;
-    background-color: rgba(255, 255, 255, 0.436);
-    box-shadow: 0px 0px 10px 1px black;
-    border-radius: 10px;
+  .next-btn h1,
+  .pre-btn h1 {
     color: rgb(0, 0, 0);
-    width: 50px;
-    height: 80px;
     cursor: pointer;
   }
   /* ------------------------------ */
   
   .product-carousel3 {
-    position: relative;
-    overflow: hidden;
-    padding: 26px;
-    padding: 0 10px;
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+  padding: 0 10px;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
   }
   
   .pre-btn3,
@@ -91,9 +74,8 @@
     width: 60px;
     height: auto;
     position: absolute;
-    top: 17%;
+    top: 32%;
     display: flex;
-    z-index: 10;
     background-color: rgba(0, 0, 0, 0);
   }
   
@@ -101,15 +83,9 @@
     right: 0;
   }
   
-  .next-btn3 p,
-  .pre-btn3 p {
-    font-size: 50px;
-    background-color: rgba(255, 255, 255, 0.436);
-    box-shadow: 0px 0px 10px 1px black;
-    border-radius: 10px;
+  .next-btn h1,
+  .pre-btn h1 {
     color: rgb(0, 0, 0);
-    width: 50px;
-    height: 80px;
     cursor: pointer;
   }
   

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Mycard from "./MyCard"
 import "./Carousel.css";
 import {useDispatch, useSelector} from "react-redux"
 import { getCarosels } from "../Redux/App/action";
-
+import {GrLinkNext,GrLinkPrevious} from 'react-icons/gr'
 export const Carosel = () => {
 
 
@@ -45,15 +45,15 @@ export const Carosel = () => {
   useEffect(() => {
     dispatch(getCarosels);
   }, []);
-// console.log(allcarosel);
+
   return (
     <div>
-      <div id="satyam">
+      <div className="satyam">
         <button className="pre-btn" onClick={carouselSlidePrev}>
-          <p>&lt;</p>
+        <h1><GrLinkPrevious/></h1>
         </button>
         <button className="next-btn" onClick={carouselSlideNext}>
-          <p>&gt;</p>
+        <h1><GrLinkNext/></h1>
         </button>
         <div className="product-carousel">
           {
@@ -65,12 +65,12 @@ export const Carosel = () => {
 
       {/* -------------------------------------------------- */}
 
-      <div id="satyam2">
+      <div className="satyam">
         <button className="pre-btn2" onClick={btnpressprev}>
-          <p>&lt;</p>
+        <h1><GrLinkPrevious/></h1>
         </button>
         <button className="next-btn2" onClick={btnpressnext}>
-          <p>&gt;</p>
+        <h1><GrLinkNext/></h1>
         </button>
         <div className="product-carousel2">
           {
@@ -82,12 +82,12 @@ export const Carosel = () => {
 
       {/* ------------------------------------------------------   */}
 
-      <div id="satyam2">
+      <div className="satyam">
         <button className="pre-btn3" onClick={thirdCaroselPrev}>
-          <p>&lt;</p>
+        <h1><GrLinkPrevious/></h1>
         </button>
         <button className="next-btn3" onClick={thirdCarouselNext}>
-          <p>&gt;</p>
+        <h1><GrLinkNext/></h1>
         </button>
         <div className="product-carousel3">
           {

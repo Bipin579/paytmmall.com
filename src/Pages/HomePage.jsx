@@ -1,6 +1,7 @@
 import "./Homepage.css";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Carosel } from "../components/Carousel.jsx";
+import {GrLinkNext,GrLinkPrevious} from 'react-icons/gr';
 
 const Homepage = () => {
 
@@ -9,13 +10,13 @@ const Homepage = () => {
   const groceryPrev = () => {
     let width = groceryBox.clientWidth;
     groceryBox.scrollLeft = groceryBox.scrollLeft - width;
-    console.log(width);
+   console.log(width)
   };
 
   const groceryNext = () => {
     let width = groceryBox.clientWidth;
     groceryBox.scrollLeft = groceryBox.scrollLeft + width;
-    console.log(width);
+    console.log(width)
   };
 
   return (
@@ -26,10 +27,10 @@ const Homepage = () => {
       <h1>Grocery & Home Furnishing</h1>
       <div className="grocery">
       <button className="groceryprebtn" onClick={groceryPrev}>
-        <p>&lt;</p>
+      <h1><GrLinkPrevious/></h1>
       </button>
       <button className="grocerynextbtn" onClick={groceryNext}>
-        <p>&gt;</p>
+      <h1><GrLinkNext/></h1>
       </button>
       <div className="grocery-container">
         <div className="grocerycard">
@@ -44,49 +45,49 @@ const Homepage = () => {
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498482/1620737072141.png?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>Big Bazaar</h3>
+          <h3>Urban Ladder</h3>
         </div>
         <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498480/1620737097910.jpg?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>Big Bazaar</h3>
-        </div>
-        <div className="grocerycard">
-          <img
-            src="https://assetscdn1.paytm.com/images/catalog/view_item/498484/1610566898069.jpg?imwidth=414&impolicy=hq"
-            alt="Bazar"
-          />
-          <h3>Big Bazaar</h3>
-        </div>
-        <div className="grocerycard">
-          <img
-            src="https://assetscdn1.paytm.com/images/catalog/view_item/498484/1610566898069.jpg?imwidth=414&impolicy=hq"
-            alt="Bazar"
-          />
           <h3>@Home</h3>
+        </div>
+        <div className="grocerycard">
+          <img
+            src="https://assetscdn1.paytm.com/images/catalog/view_item/498484/1610566898069.jpg?imwidth=414&impolicy=hq"
+            alt="Bazar"
+          />
+          <h3>More</h3>
+        </div>
+        <div className="grocerycard">
+          <img
+            src="https://assetscdn1.paytm.com/images/catalog/view_item/498484/1610566898069.jpg?imwidth=414&impolicy=hq"
+            alt="Bazar"
+          />
+          <h3>More</h3>
         </div>
         <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498485/1620737113562.png?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>@Home</h3>
+          <h3>@Homecentre</h3>
         </div>
         <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498490/1610567023040.png?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>@Home</h3>
+          <h3>Prestige</h3>
         </div>
         <div className="grocerycard">
           <img
             src="https://assetscdn1.paytm.com/images/catalog/view_item/498486/1610567208285.png?imwidth=414&impolicy=hq"
             alt="Bazar"
           />
-          <h3>@Home</h3>
+          <h3>Ratnadeep</h3>
         </div>
       </div>
     </div>
@@ -171,36 +172,36 @@ const Homepage = () => {
         </p>
         <h4>Benefits of shopping on Paytmmall.com</h4>
         <p className="p">
-          User-Friendly: Leading online shopping experience in India which is
+          <span className="span">User-Friendly:</span> Leading online shopping experience in India which is
           simple and faster to load. Shop on the go and get the products
           delivered in just a few easy clicks.
         </p>
         <p className="p">
-          Safe & Secure Shopping: You need not worry about your account
+          <span className="span">Safe & Secure Shopping:</span> You need not worry about your account
           credentials or personal details. Each and every transaction at Paytm
           Mall is securely processed and you can be rest assured that your money
           is in safe hands.
         </p>
         <p className="p">
-          Check Out Closely: View products of your choice in detail with clear
+          <span className="span">Check Out Closely:</span> View products of your choice in detail with clear
           images and thorough descriptions before buying.
         </p>
         <p className="p">
-          Multiple Payment Options: Choose a payment option of your choice i.e.
+          <span className="span">Multiple Payment Options:</span> Choose a payment option of your choice i.e.
           Credit/Debit Cards, Netbanking and UPI. Use Paytm Wallet for quick
           checkouts & hassle-free payments
         </p>
         <p className="p">
-          Paytm Postpaid Services: Now, you can buy today and pay next month
+          <span className="span">Paytm Postpaid Services:</span> Now, you can buy today and pay next month
           with Paytm-ICICI Bank Postpaid.
         </p>
         <p className="p">
-          Order History: All your orders show up at one place, you can track
+          <span className="span">Order History:</span> All your orders show up at one place, you can track
           them or repeat them with ease. Trouble-free returns, track request &
           replacement of your orders
         </p>
         <p className="p">
-          24x7 Customer Care: For all your queries and concerns regarding your
+          <span className="span">24x7 Customer Care:</span> For all your queries and concerns regarding your
           shopping orders, head over to paytmmall.com/care or call us at
           01204606060 anytime
         </p>
