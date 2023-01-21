@@ -8,7 +8,7 @@ const Fashion = () => {
   const [page, setPage] = useState(1);
   const getData = () =>{
     setIsLoading(true)
-    axios.get(`https://paytmmallserver.onrender.com/product?_page=${page}&_limit=20`).then((res)=>{
+    axios.get(`https://paytmmallserver.onrender.com/product?_page=${page}&_limit=20&category=fashion`).then((res)=>{
       setIsLoading(false);
      // console.log(res);
       setFashionData(res.data);
@@ -17,7 +17,8 @@ const Fashion = () => {
  
   useEffect(()=>{
     getData(page)
-  },[page])
+  }, [page])
+  
 
   const Loading=()=>{
     return(
@@ -40,21 +41,18 @@ const Fashion = () => {
           <Box 
           
            key={el.id}
-           className='eachBox'
             mt='20px'
             align='left'
            
             style={{
               background:'white',
               fontFamily: "Open Sans",
-              display: "flex",
               padding:'10px',
-              flexDirection: "column",
-              alignItems: "center"
+
             }}
           >
            
-            <Image w='250px' h='350px'  mt='-10px'  src={el.img}></Image>
+            <Image w='70%'  objectFit={"scale-down"} h={"50%"}  mt='-10px'  src={el.img} m="auto"></Image>
        <Box
           mt='1'
           as='h4'
