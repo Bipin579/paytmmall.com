@@ -28,6 +28,7 @@ const SingleProductPage = () => {
       
   
   return (
+
     <Box bg='#f4f4f4'>
      <Box fontSize='xl'>SingleProductPage</Box>
        <SimpleGrid columns={{base:1,sm:2,md:3,lg:3}} w='100%' mt='30px'>
@@ -113,8 +114,6 @@ const SingleProductPage = () => {
        
 
 </Box>
-   
-   
   )
 }
 

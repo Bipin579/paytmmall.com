@@ -15,6 +15,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, signup } from "../Redux/Auth/action";
+import Loading from "../components/Loading";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ function Signup() {
   const dispatch = useDispatch();
   const users = useSelector((store) => store.AuthReducer.users);
   const loading = useSelector((store) => store.AuthReducer.isLoading);
+  
   useEffect(() => {
     dispatch(getUsers);
   }, []);
@@ -41,8 +43,7 @@ function Signup() {
   };
   let newToastFail = () => {
     return toast({
-      title: "Successfully Logged In.",
-      description: `Welcome ${email}`,
+      title: "Unable to create Account.",
       status: "error",
       duration: 3000,
       position: "top",
@@ -75,20 +76,14 @@ function Signup() {
       };
       dispatch(signup(newUser, newToastSucess, newToastFail)).then(() => {
         dispatch(getUsers);
+        <Navigate to={"/login"} />
       });
     }
   };
 
-  // console.log(bool);
-  // if (isAuth) {
-  //   return (
-  //     <>
-  //       <Navigate to={"/"} />
-  //     </>
-  //   )
-  // }
+  
 
-  return loading?<Box>...loading</Box>:( 
+  return loading?<Loading />:( 
       <>
           
       <Flex

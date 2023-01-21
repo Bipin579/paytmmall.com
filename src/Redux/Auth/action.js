@@ -75,9 +75,11 @@ export const getUsers = (dispatch) => {
 
 
 export const setLogin = (dispatch) => {
+  localStorage.setItem("isAuth", true);
   dispatch(setLoginAction());
 };
 
 export const setLogout = (dispatch) => {
+  localStorage.setItem("isAuth", false);
   dispatch(setLogoutAction());
 };
