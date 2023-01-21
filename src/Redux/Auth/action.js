@@ -1,4 +1,10 @@
 import {
+  ADD_CART_FAILURE,
+  ADD_CART_REQUEST,
+  ADD_CART_SUCCESS,
+  DELETE_CART_FAILURE,
+  DELETE_CART_REQUEST,
+  DELETE_CART_SUCCESS,
   GET_USER_FAILURE,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -44,6 +50,30 @@ export const setLoginAction = () => {
 export const setLogoutAction = () => {
   return { type: SET_LOGOUT_REQUEST };
 };
+
+// Add cart actions
+export const addRequestAction = () => {
+  return {type: ADD_CART_REQUEST}
+}
+export const addSuccessAction = () => {
+  return {type: ADD_CART_SUCCESS}
+}
+export const addFailureAction = () => {
+  return {type: ADD_CART_FAILURE}
+}
+
+// delete cart actions
+
+export const deleteRequestAction = () => {
+  return {type: DELETE_CART_REQUEST}
+}
+export const deleteSuccessAction = () => {
+  return {type: DELETE_CART_SUCCESS,}
+}
+export const deleteFailureAction = () => {
+  return {type: DELETE_CART_FAILURE}
+}
+
 // singup function
 
 export const signup = (user, newToastSucess, newToastFail) => (dispatch) => {
@@ -83,3 +113,9 @@ export const setLogout = (dispatch) => {
   localStorage.setItem("isAuth", false);
   dispatch(setLogoutAction());
 };
+
+
+// export const addToCart = (id,cart) =>(dispatch)=> {
+//   dispatch( )
+  
+// }

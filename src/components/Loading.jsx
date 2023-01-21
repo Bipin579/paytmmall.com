@@ -3,10 +3,10 @@ import React from 'react'
 
 const Loading = () => {
   return (
-      <Box display={"flex"} justifyContent="center" alignItems={"center"} p={"150px"}>
-          <Image src='https://i.gifer.com/YVPG.gif' w={"50%"} />
+      <Box display={"flex"} justifyContent="center" alignItems={"center"} p={"10%"} maxW="6xl" m={"auto"}>
+          <Image src='https://i.gifer.com/YVPG.gif' w="full" />
     </Box>
   )
 }
 
-export default Loading
+export default Loading;
