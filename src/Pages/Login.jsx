@@ -11,7 +11,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,21 +26,25 @@ function Login() {
   const dispatch = useDispatch();
   let users = useSelector((store) => store.AuthReducer.users);
   const loading = useSelector((store) => store.AuthReducer.isLoading);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const comingFrom = location.state?.from?.pathname || "/";
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
-  localStorage.setItem("isAuth", isAuth);
+  
 
   useEffect(() => {
     dispatch(getUsers);
   }, []);
 
-  console.log(users);
+  // console.log(users);
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let check = users.some((el) => {
+    let check = users.find((el) => {
       return el.email === email && el.password === password;
     });
     // console.log(check);
+    localStorage.setItem("userId",check.id)
     if (check) {
       toast({
         title: "Login Successfully.",
@@ -51,6 +55,7 @@ function Login() {
         isClosable: true,
       });
       dispatch(setLogin);
+      navigate(comingFrom,{replace:true})
     } else {
       toast({
         title: "Wrong Creadentials.",
@@ -63,13 +68,8 @@ function Login() {
     }
   };
   console.log(isAuth);
-  // if (isAuth) {
-  //   return (
-  //     <>
-  //       <Navigate to={"/"} />
-  //     </>
-  //   )
-  // }
+
+
 
   return loading ? (
     <Box>...loading</Box>
