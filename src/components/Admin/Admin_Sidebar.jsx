@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Avatar, HStack, Link, IconButton, Menu, MenuButton, MenuList, MenuItem, MenuDivider, useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Avatar, HStack, Link, IconButton, Menu, MenuButton, MenuList, MenuItem, MenuDivider, useDisclosure, useColorModeValue, Heading } from '@chakra-ui/react';
 import { CloseButton, VStack, Icon, Drawer, DrawerContent, Text } from '@chakra-ui/react';
 import { FiHome, FiCompass, FiMenu, FiBell, FiChevronDown, FiUsers, FiPlus, FiShoppingCart} from 'react-icons/fi';
 import ManageAdmins from './ManageAdmins';
@@ -77,8 +77,7 @@ function SidebarWithHeader({ children }) {
                 </Drawer>
                 {/* mobilenav */}
                 <MobileNav onOpen={onOpen} />
-                <Flex className='main-content' justifyContent={'center'} ml='100'  >
-                    <h2>{}</h2>
+                <Flex className='main-content' justifyContent={'center'} ml='100'>
                     {componentChange()}
                 </Flex>
                 <Box ml={{ base: 0, md: 60 }} p="4">{children}</Box>

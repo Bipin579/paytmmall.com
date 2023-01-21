@@ -1,11 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getUsersList } from '../../Redux/Admin/action';
-import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast} from '@chakra-ui/react'
+import {Table,Thead,Tbody,Tfoot,Tr,Th,Td,TableContainer,Heading,IconButton,useToast} from '@chakra-ui/react'
 import {FiUserX} from 'react-icons/fi';
 
 const ManageUsers = () => {
    const { isLoadingUserList, isErrorUserList, users } = useSelector(store => store.AdminReducer);
+   const orderRef=useRef(0);
+   const cartRef=useRef(0);
+   const totalRef=useRef(0);
+   const profitRef=useRef(0);
    const dispatch = useDispatch();
    const toast = useToast();
 
@@ -46,7 +50,7 @@ const ManageUsers = () => {
             <Thead>
               <Tr>
                 <Th>User</Th>
-                <Th isNumeric>Orders</Th>
+                <Th>Order</Th>
                 <Th>Cart</Th>
                 <Th>Total</Th>
                 <Th>Profit</Th>
@@ -54,15 +58,31 @@ const ManageUsers = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {users.map(user=><Tr key={user.id}>
+              {users.map((user)=>{
+                orderRef.current+=user.orders.length;
+                cartRef.current+=user.cart.length;
+                totalRef.current+=300;
+                profitRef.current+=100;
+                return <Tr key={user.id}>
                 <Td>{user.name}</Td>
-                <Td isNumeric>{user.orders=0}</Td>
+                <Td >{user.orders=0}</Td>
                 <Td>{user.cart=0}</Td>
-                <Td isNumeric>{'₹'+300}</Td>
-                <Td isNumeric>{'₹'+100}</Td>
+                <Td >{'₹'+300}</Td>
+                <Td >{'₹'+100}</Td>
                 <Td><IconButton aria-label='Delete database' onClick={()=>handleDelete(user)} icon={<FiUserX/>}/></Td>
-              </Tr>)}
+                </Tr>
+              })}
             </Tbody>
+            <Tfoot bg={'yellow.400'}>
+              <Tr>
+                <Th>Total : {users.length}</Th>
+                <Th >Orders : {+orderRef.current}</Th>
+                <Th>Cart : {+cartRef.current}</Th>
+                <Th>Total : ₹{totalRef.current}</Th>
+                <Th>Profit : ₹{profitRef.current}</Th>
+                <Th></Th>
+                </Tr>
+            </Tfoot>
           </Table>
         </TableContainer>
           }
