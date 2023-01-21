@@ -1,358 +1,146 @@
-import { Box, Center, useColorModeValue, Heading, Text, Stack, Image, IconButton, Flex, useToast } from '@chakra-ui/react';
+import { Box, Center, Heading, Text, Stack, Image, IconButton, Flex, useToast, Progress, ButtonGroup, Button, FormControl, FormLabel, Input, SimpleGrid } from '@chakra-ui/react';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
-import React, { useState } from 'react';
-import {
-  Progress,
-  ButtonGroup,
-  Button,
-  FormControl,
-  GridItem,
-  FormLabel,
-  Input,
-  Select,
-  SimpleGrid,
-  InputLeftAddon,
-  InputGroup,
-  Textarea,
-  FormHelperText,
-  InputRightElement,
-} from '@chakra-ui/react';
+import React, {useRef, useState} from 'react';
+import { deleteProduct, updateProduct } from '../../Redux/Admin/action';
+import { useDispatch } from 'react-redux';
 
-const SingleProduct = ({ p }) => {
-  const price = p.originalPrice.split('-');
+const SingleProduct = ({ product }) => {
+  const formRef=useRef(product);
+  const dispatch = useDispatch();
+  const price = product.originalPrice.split('-');
+  const [showEdit, setShowEdit] = useState(false);
+  const toast = useToast();
+  const [step, setStep] = useState(1);
+  const [progress, setProgress] = useState(50);
 
-  // form for editing/updating product
-  // const Form1 = () => {
-  //   const [show, setShow] = React.useState(false);
-  //   const handleClick = () => setShow(!show);
-  //   return (
-  //     <>
-  //       <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
-  //         User Registration
-  //       </Heading>
-  //       <Flex>
-  //         <FormControl mr="5%">
-  //           <FormLabel htmlFor="first-name" fontWeight={'normal'}>
-  //             First name
-  //           </FormLabel>
-  //           <Input id="first-name" placeholder="First name" />
-  //         </FormControl>
+  const formChangeHandler = (e) => {
+    const { name, value } = e.target;
+    formRef.current[name]=value;
+  }
 
-  //         <FormControl>
-  //           <FormLabel htmlFor="last-name" fontWeight={'normal'}>
-  //             Last name
-  //           </FormLabel>
-  //           <Input id="last-name" placeholder="First name" />
-  //         </FormControl>
-  //       </Flex>
-  //       <FormControl mt="2%">
-  //         <FormLabel htmlFor="email" fontWeight={'normal'}>
-  //           Email address
-  //         </FormLabel>
-  //         <Input id="email" type="email" />
-  //         <FormHelperText>We'll never share your email.</FormHelperText>
-  //       </FormControl>
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+      try {
+         dispatch(updateProduct(formRef.current));
+         toast(
+          {
+            title: 'Product Updated',
+            description: `${formRef.current.description} has been updated successfully.`,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+      } catch (error) {
+        toast(
+          {
+            title: 'Error white editing',
+            description: `${formRef.current.description} has not edit.`,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+      }
+      setShowEdit(false)
+  }
 
-  //       <FormControl>
-  //         <FormLabel htmlFor="password" fontWeight={'normal'} mt="2%">
-  //           Password
-  //         </FormLabel>
-  //         <InputGroup size="md">
-  //           <Input
-  //             pr="4.5rem"
-  //             type={show ? 'text' : 'password'}
-  //             placeholder="Enter password"
-  //           />
-  //           <InputRightElement width="4.5rem">
-  //             <Button h="1.75rem" size="sm" onClick={handleClick}>
-  //               {show ? 'Hide' : 'Show'}
-  //             </Button>
-  //           </InputRightElement>
-  //         </InputGroup>
-  //       </FormControl>
-  //     </>
-  //   );
-  // };
+  const Form1 = () => {
+    return (
+      <>
+        <Heading w="100%" size={'md'} textAlign={'center'} fontWeight="normal">Edit Product</Heading>
+        <FormControl mt={'2'}>
+          <FormLabel htmlFor="name" fontWeight={'normal'}>Name</FormLabel>
+          <Input id="description" name='description' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+        </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="brand" fontWeight={'normal'}>Brand</FormLabel>
+            <Input id="brand" type="text" name='brand' onChange={formChangeHandler} size={'sm'} fontSize={'small'} />
+          </FormControl>       
+      </>
+    );
+  };
 
-  // const Form2 = () => {
-  //   return (
-  //     <>
-  //       <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
-  //         User Details
-  //       </Heading>
-  //       <FormControl as={GridItem} colSpan={[6, 3]}>
-  //         <FormLabel
-  //           htmlFor="country"
-  //           fontSize="sm"
-  //           fontWeight="md"
-  //           color="gray.700"
-  //           _dark={{
-  //             color: 'gray.50',
-  //           }}>
-  //           Country / Region
-  //         </FormLabel>
-  //         <Select
-  //           id="country"
-  //           name="country"
-  //           autoComplete="country"
-  //           placeholder="Select option"
-  //           focusBorderColor="brand.400"
-  //           shadow="sm"
-  //           size="sm"
-  //           w="full"
-  //           rounded="md">
-  //           <option>United States</option>
-  //           <option>Canada</option>
-  //           <option>Mexico</option>
-  //         </Select>
-  //       </FormControl>
+  const Form2 = () => {
+    return (
+      <>
+        <Heading w="100%" textAlign={'center'} size={'md'} fontWeight="normal">Edit Product</Heading>
+        <SimpleGrid>
+          <Flex>
+            <FormControl mr="5%">
+              <FormLabel htmlFor="originalPrice" fontWeight={'normal'}>Original Price</FormLabel>
+              <Input id="original-price" name='originalPrice' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="description" fontWeight={'normal'}>Discount Price</FormLabel>
+              <Input id="discount-price" name='discountPrice' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+            </FormControl>
+          </Flex>
+          <FormControl mt={'2'}>
+            <FormLabel htmlFor="brand" fontWeight={'normal'}>Category</FormLabel>
+            <Input id="category" type="text" name='category' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+          </FormControl>
+        </SimpleGrid>
+      </>
+    );
+  };
 
-  //       <FormControl as={GridItem} colSpan={6}>
-  //         <FormLabel
-  //           htmlFor="street_address"
-  //           fontSize="sm"
-  //           fontWeight="md"
-  //           color="gray.700"
-  //           _dark={{
-  //             color: 'gray.50',
-  //           }}
-  //           mt="2%">
-  //           Street address
-  //         </FormLabel>
-  //         <Input
-  //           type="text"
-  //           name="street_address"
-  //           id="street_address"
-  //           autoComplete="street-address"
-  //           focusBorderColor="brand.400"
-  //           shadow="sm"
-  //           size="sm"
-  //           w="full"
-  //           rounded="md"
-  //         />
-  //       </FormControl>
+  const handleDelete = (product) => {
+    try {
+      dispatch(deleteProduct(product.id));
+      toast({
+        title: 'Product Deleted',
+        description: `${product.description} has been deleted successfully`,
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      })
+    } catch (error) {
+      toast({
+        title: 'Error while deleting',
+        description: `${product.description} has not deleted`,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+      })
+    }
+  }
 
-  //       <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
-  //         <FormLabel
-  //           htmlFor="city"
-  //           fontSize="sm"
-  //           fontWeight="md"
-  //           color="gray.700"
-  //           _dark={{
-  //             color: 'gray.50',
-  //           }}
-  //           mt="2%">
-  //           City
-  //         </FormLabel>
-  //         <Input
-  //           type="text"
-  //           name="city"
-  //           id="city"
-  //           autoComplete="city"
-  //           focusBorderColor="brand.400"
-  //           shadow="sm"
-  //           size="sm"
-  //           w="full"
-  //           rounded="md"
-  //         />
-  //       </FormControl>
+  const editFunc = () => {
+    return <Box borderWidth="1px" rounded="lg" shadow="1px 1px 3px rgba(0,0,0,0.3)" maxWidth={200} p={6} m="10px auto" as="form">
+      <Progress hasStripe value={progress} mb="5%" mx="5%" isAnimated></Progress>
+      {step === 1 ? <Form1 /> : <Form2 />}
+      <ButtonGroup mt="5%" w="100%">
+        <Flex w="100%" justifyContent="space-evenly">
+          <Button
+            onClick={() => { setStep(step - 1); setProgress(progress - 50) }} isDisabled={step === 1} colorScheme="teal" variant="solid" w="3.5rem" fontSize={'small'} mr="2%">
+            Back
+          </Button>
+          <Button w="3.5rem" isDisabled={step === 2} colorScheme="teal" fontSize={'small'} variant="outline" mr="2%" onClick={() => {
+            setStep(step + 1);
+            if (step === 2) {
+              setProgress(100);
+            } else {
+              setProgress(progress + 50);
+            }
+          }}>Next
+          </Button>
+          <Button w="3.5rem" colorScheme="black" fontSize={'small'} variant="outline" mr="2%" onClick={() => {
+            setShowEdit(false)
+          }}>Cancel
+          </Button>
+          {step === 2 ? (
+            <Button w="3.5rem" colorScheme="red" variant="solid" fontSize={'small'} mr="2%" onClick={formSubmitHandler}>Submit
+            </Button>
+          ) : null}
+        </Flex>
+      </ButtonGroup>
+    </Box>
+  }
 
-  //       <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-  //         <FormLabel
-  //           htmlFor="state"
-  //           fontSize="sm"
-  //           fontWeight="md"
-  //           color="gray.700"
-  //           _dark={{
-  //             color: 'gray.50',
-  //           }}
-  //           mt="2%">
-  //           State / Province
-  //         </FormLabel>
-  //         <Input
-  //           type="text"
-  //           name="state"
-  //           id="state"
-  //           autoComplete="state"
-  //           focusBorderColor="brand.400"
-  //           shadow="sm"
-  //           size="sm"
-  //           w="full"
-  //           rounded="md"
-  //         />
-  //       </FormControl>
-
-  //       <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-  //         <FormLabel
-  //           htmlFor="postal_code"
-  //           fontSize="sm"
-  //           fontWeight="md"
-  //           color="gray.700"
-  //           _dark={{
-  //             color: 'gray.50',
-  //           }}
-  //           mt="2%">
-  //           ZIP / Postal
-  //         </FormLabel>
-  //         <Input
-  //           type="text"
-  //           name="postal_code"
-  //           id="postal_code"
-  //           autoComplete="postal-code"
-  //           focusBorderColor="brand.400"
-  //           shadow="sm"
-  //           size="sm"
-  //           w="full"
-  //           rounded="md"
-  //         />
-  //       </FormControl>
-  //     </>
-  //   );
-  // };
-
-  // const Form3 = () => {
-  //   return (
-  //     <>
-  //       <Heading w="100%" textAlign={'center'} fontWeight="normal">
-  //         Social Handles
-  //       </Heading>
-  //       <SimpleGrid columns={1} spacing={6}>
-  //         <FormControl as={GridItem} colSpan={[3, 2]}>
-  //           <FormLabel
-  //             fontSize="sm"
-  //             fontWeight="md"
-  //             color="gray.700"
-  //             _dark={{
-  //               color: 'gray.50',
-  //             }}>
-  //             Website
-  //           </FormLabel>
-  //           <InputGroup size="sm">
-  //             <InputLeftAddon
-  //               bg="gray.50"
-  //               _dark={{
-  //                 bg: 'gray.800',
-  //               }}
-  //               color="gray.500"
-  //               rounded="md">
-  //               http://
-  //             </InputLeftAddon>
-  //             <Input
-  //               type="tel"
-  //               placeholder="www.example.com"
-  //               focusBorderColor="brand.400"
-  //               rounded="md"
-  //             />
-  //           </InputGroup>
-  //         </FormControl>
-
-  //         <FormControl id="email" mt={1}>
-  //           <FormLabel
-  //             fontSize="sm"
-  //             fontWeight="md"
-  //             color="gray.700"
-  //             _dark={{
-  //               color: 'gray.50',
-  //             }}>
-  //             About
-  //           </FormLabel>
-  //           <Textarea
-  //             placeholder="you@example.com"
-  //             rows={3}
-  //             shadow="sm"
-  //             focusBorderColor="brand.400"
-  //             fontSize={{
-  //               sm: 'sm',
-  //             }}
-  //           />
-  //           <FormHelperText>
-  //             Brief description for your profile. URLs are hyperlinked.
-  //           </FormHelperText>
-  //         </FormControl>
-  //       </SimpleGrid>
-  //     </>
-  //   );
-  // };
-
-  // function multistep() {
-  //   const toast = useToast();
-  //   const [step, setStep] = useState(1);
-  //   const [progress, setProgress] = useState(33.33);
-  //   return (
-  //     <>
-  //       <Box
-  //         borderWidth="1px"
-  //         rounded="lg"
-  //         shadow="1px 1px 3px rgba(0,0,0,0.3)"
-  //         maxWidth={800}
-  //         p={6}
-  //         m="10px auto"
-  //         as="form">
-  //         <Progress
-  //           hasStripe
-  //           value={progress}
-  //           mb="5%"
-  //           mx="5%"
-  //           isAnimated></Progress>
-  //         {step === 1 ? <Form1 /> : step === 2 ? <Form2 /> : <Form3 />}
-  //         <ButtonGroup mt="5%" w="100%">
-  //           <Flex w="100%" justifyContent="space-between">
-  //             <Flex>
-  //               <Button
-  //                 onClick={() => {
-  //                   setStep(step - 1);
-  //                   setProgress(progress - 33.33);
-  //                 }}
-  //                 isDisabled={step === 1}
-  //                 colorScheme="teal"
-  //                 variant="solid"
-  //                 w="7rem"
-  //                 mr="5%">
-  //                 Back
-  //               </Button>
-  //               <Button
-  //                 w="7rem"
-  //                 isDisabled={step === 3}
-  //                 onClick={() => {
-  //                   setStep(step + 1);
-  //                   if (step === 3) {
-  //                     setProgress(100);
-  //                   } else {
-  //                     setProgress(progress + 33.33);
-  //                   }
-  //                 }}
-  //                 colorScheme="teal"
-  //                 variant="outline">
-  //                 Next
-  //               </Button>
-  //             </Flex>
-  //             {step === 3 ? (
-  //               <Button
-  //                 w="7rem"
-  //                 colorScheme="red"
-  //                 variant="solid"
-  //                 onClick={() => {
-  //                   toast({
-  //                     title: 'Account created.',
-  //                     description: "We've created your account for you.",
-  //                     status: 'success',
-  //                     duration: 3000,
-  //                     isClosable: true,
-  //                   });
-  //                 }}>
-  //                 Submit
-  //               </Button>
-  //             ) : null}
-  //           </Flex>
-  //         </ButtonGroup>
-  //       </Box>
-  //     </>
-  //   );
-  // }
+  if (showEdit) return editFunc(product);
 
   return (
-    <Center py={1}>
-      <Box role={'group'} p={6} maxW={'200px'} w={'full'} bg={useColorModeValue('white', 'gray.800')} boxShadow={'2xl'} rounded={'lg'} pos={'relative'} zIndex={1}>
+    <Center bg='white' mt='2'>
+      <Box role={'group'} p={6} maxW={'200px'} w={'full'} boxShadow={'2xl'} rounded={'lg'} pos={'relative'} zIndex={1}>
         <Box
           rounded={'lg'}
           pos={'relative'}
@@ -372,19 +160,19 @@ const SingleProduct = ({ p }) => {
               filter: 'blur(20px)',
             },
           }}>
-          <Image rounded={'lg'} boxSize={150} objectFit={'cover'} src={p.img} />
+          <Image rounded={'lg'} boxSize={150} objectFit={'cover'} src={product.img} />
         </Box>
         <Stack align={'center'}>
-          <Heading fontSize={'md'} fontFamily={'body'} fontWeight={500}>{p.description}</Heading>
+          <Heading fontSize={'md'} fontFamily={'body'} fontWeight={500}>{product.description}</Heading>
           <Stack direction={'row'} align={'center'}>
-            <Text fontWeight={800} fontSize={'md'}>₹{price[0]}</Text>
-            <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{p.discountPrice}</Text>
+            <Text fontWeight={800} fontSize={'md'}>₹{product.discountPrice}</Text>
+            <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{price[0]}</Text>
             <Text color='green.400'>{price[1]}</Text>
           </Stack>
         </Stack>
         <Flex justifyContent={'space-evenly'}>
-          <IconButton aria-label='Delete Product' icon={<FiTrash2 />} />
-          <IconButton aria-label='Delete Product' icon={<FiEdit />} />
+          <IconButton aria-label='Delete Product' onClick={() => handleDelete(product)} icon={<FiTrash2 />} />
+          <IconButton aria-label='Edit Product' onClick={() => setShowEdit(true)} icon={<FiEdit />} />
         </Flex>
       </Box>
     </Center>

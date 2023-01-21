@@ -5,9 +5,8 @@ import { Heading,Grid } from '@chakra-ui/react';
 import SingleProduct from './AdminSingleProduct';
 
 const ManageProducts = () => {
-  const {isLoading,isError,product}=useSelector(store=>store.AppReducer);
+  const {isLoading,isError,products}=useSelector(store=>store.AdminReducer);
   const dispatch=useDispatch();
-  console.log(isLoading,isError,product);
 
   useEffect(()=>{
     dispatch(getProducts);
@@ -18,8 +17,8 @@ const ManageProducts = () => {
       <Heading>Manage Products</Heading>
       {isLoading && <h2>Loading...</h2>}
       {isError && <h2>Error Occured while getting product list</h2>}
-      <Grid templateColumns={'repeat(4,1fr)'} gap={'2'} className='flexbro' templateRows={'100'}>
-      {product.length>0 && product.map(p=><SingleProduct key={p.id} p={p}/>)}
+      <Grid templateColumns={'repeat(4,1fr)'} gap={2} className='flexbro' templateRows={'100'}>
+      {products.length>0 && products.map(product=><SingleProduct key={product.id} product={product}/>)}
       </Grid>
     </div>
   )

@@ -20,47 +20,49 @@ import {
   UPDATE_PRODUCT_FAILURE,
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
+  GET_PRODUCT_DATA_REQUEST,
+  GET_PRODUCT_DATA_SUCCESS,
+  GET_PRODUCT_DATA_FAILURE
 } from "./actionTypes";
 import axios from "axios";
+
+const getProductDataRequest = () =>({type:GET_PRODUCT_DATA_REQUEST})
+const getProductDataSuccess = (payload) =>({type: GET_PRODUCT_DATA_SUCCESS, payload})
+const getProductDataFailure = () =>({type: GET_PRODUCT_DATA_FAILURE})
 const addProductRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addProductSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addProductFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 const deleteProductRequest = () => ({ type: DELETE_PRODUCT_REQUEST });
-const deleteProductSuccess = (payload) => ({
-  type: DELETE_PRODUCT_SUCCESS,
-  payload,
-});
+const deleteProductSuccess = (payload) => ({type: DELETE_PRODUCT_SUCCESS,payload,});
 const deleteProductFailure = () => ({ type: DELETE_PRODUCT_FAILURE });
 const updateProductRequest = () => ({ type: UPDATE_PRODUCT_REQUEST });
-const updateProductSuccess = (payload) => ({
-  type: UPDATE_PRODUCT_SUCCESS,
-  payload,
-});
+const updateProductSuccess = (payload) => ({type: UPDATE_PRODUCT_SUCCESS,payload,});
 const updateProductFailure = () => ({ type: UPDATE_PRODUCT_FAILURE });
 const getUserListRequest = () => ({ type: GET_USERLIST_REQUEST });
-const getUserListSuccess = (payload) => ({
-  type: GET_USERLIST_SUCCESS,
-  payload,
-});
+const getUserListSuccess = (payload) => ({type: GET_USERLIST_SUCCESS,payload,});
 const getUserListFailure = () => ({ type: GET_USERLIST_FAILURE });
 const deleteUserRequest = () => ({ type: DELETE_USER_REQUEST });
 const deleteUserSuccess = (payload) => ({ type: DELETE_USER_SUCCESS, payload });
 const deleteUserFailure = () => ({ type: DELETE_USER_FAILURE });
 const getAdminListRequest = () => ({ type: GET_ADMINLIST_REQUEST });
-const getAdminListSuccess = (payload) => ({
-  type: GET_ADMINLIST_SUCCESS,
-  payload,
-});
+const getAdminListSuccess = (payload) => ({type: GET_ADMINLIST_SUCCESS,payload});
 const getAdminListFailure = () => ({ type: GET_ADMINLIST_FAILURE });
 const addAdminRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addAdminSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addAdminFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 const deleteAdminRequest = () => ({ type: DELETE_ADMIN_REQUEST });
-const deleteAdminSuccess = (payload) => ({
-  type: DELETE_ADMIN_SUCCESS,
-  payload,
-});
+const deleteAdminSuccess = (payload) => ({type: DELETE_ADMIN_SUCCESS,payload});
 const deleteAdminFailure = () => ({ type: DELETE_ADMIN_FAILURE });
+
+export const getProducts = (dispatch) => {
+  dispatch(getProductDataRequest())
+  axios.get(`https://paytmmallserver.onrender.com/product`).then((res) => {
+      dispatch(getProductDataSuccess(res.data))
+  }).catch((err) => {
+      dispatch(getProductDataFailure());
+      console.log(err);
+  })
+}
 
 export const addProduct = (product) => async (dispatch) => {
   dispatch(addProductRequest());
@@ -74,23 +76,21 @@ export const addProduct = (product) => async (dispatch) => {
     dispatch(addProductFailure(error));
   }
 };
+
 export const deleteProduct = (id) => async (dispatch) => {
   dispatch(deleteProductRequest());
   try {
-    const { data } = await axios.delete(
-      `https://paytmmallserver.onrender.com/product/${id}`
-    );
-    dispatch(deleteProductSuccess(data));
+    axios.delete(`https://paytmmallserver.onrender.com/product/${id}`);
+    dispatch(deleteProductSuccess(id));
   } catch (error) {
     dispatch(deleteProductFailure(error));
   }
 };
-export const updateProduct = (id, product) => async (dispatch) => {
+export const updateProduct = (product) => async (dispatch) => {
   dispatch(updateProductRequest());
   try {
-    const { data } = await axios.put(
-      `https://paytmmallserver.onrender.com/product/${id}`,
-      product
+    const { data } = await axios.patch(
+      `https://paytmmallserver.onrender.com/product/${product.id}`,product
     );
     dispatch(updateProductSuccess(data));
   } catch (error) {
@@ -102,7 +102,7 @@ export const getUsersList = async (dispatch) => {
   dispatch(getUserListRequest());
   try {
     const { data } = await axios.get(
-      "https://mock-data-zsk0.onrender.com/users"
+      "https://paytmmallserver.onrender.com/users"
     );
     dispatch(getUserListSuccess(data));
   } catch (error) {
@@ -127,7 +127,7 @@ export const getAdminList = async (dispatch) => {
   dispatch(getAdminListRequest());
   try {
     const { data } = await axios.get(
-      "https://mock-data-zsk0.onrender.com/admins"
+      "https://paytmmallserver.onrender.com/admins"
     );
     dispatch(getAdminListSuccess(data));
   } catch (error) {

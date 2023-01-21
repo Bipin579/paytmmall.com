@@ -57,7 +57,7 @@ const ManageAdmins = () => {
                 <Td><Image src={admin.image} alt={admin.name} boxSize='90px' borderRadius='full' /></Td>
                 <Td>{admin.name}</Td>
                 <Td>{admin.email}</Td>
-                <Td>{admin.contactNo}</Td>
+                <Td>{admin.contact}</Td>
                 <Td>{admin.role}</Td>
                 <Td><IconButton aria-label='Delete database' onClick={()=>handleDelete(admin)} icon={<FiUserX/>}/></Td>
               </Tr>)}
