@@ -115,7 +115,7 @@ export const setLogout = (dispatch) => {
 };
 
 
-export const addToCart = (id,cart) =>(dispatch)=> {
-  dispatch( )
+// export const addToCart = (id,cart) =>(dispatch)=> {
+//   dispatch( )
   
-}
+// }
