@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Box,
@@ -176,9 +177,12 @@ const Fashion = () => {
             Next
           </Button>
         </Box>
+
       </Box>
     </Box>
+
   );
 };
 
 export default Fashion;
+

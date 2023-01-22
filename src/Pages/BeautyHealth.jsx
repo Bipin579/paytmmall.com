@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const BeautyHealth = () => {
   return (
-    <div>BeautyHealth</div>
-  )
-}
+    <>
+      <Navbar />
+      Hello
+      <Footer />
+    </>
+  );
+};
 
-export default BeautyHealth
+export default BeautyHealth;

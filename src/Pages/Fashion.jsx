@@ -11,11 +11,17 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import { NavLink } from "react-router-dom";
+
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
 const Fashion = () => {
   const [fashionData, setFashionData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+
 
   const getData = () => {
     setIsLoading(true);
@@ -50,6 +56,8 @@ const Fashion = () => {
     setFashionData(newData);
   };
 
+
+ 
   useEffect(() => {
     getData(page);
   }, [page]);
@@ -70,6 +78,9 @@ const Fashion = () => {
     <Loading />
   ) : (
     <Box>
+
+      <Navbar />
+
       <Box
         boxShadow="md"
         display="flex"
@@ -80,6 +91,7 @@ const Fashion = () => {
       >
         <Heading>Fashion</Heading>
       </Box>
+
 
       {/* sidebar */}
 
@@ -94,17 +106,20 @@ const Fashion = () => {
             <Text as="b">High to Low Price</Text>
           </Box>
         </Box>
+
         <SimpleGrid
           columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
           spacing={6}
           w="75%"
           mr="40px"
         >
+
           {fashionData?.map((el,index) => (
             <Box key={index}>
               <NavLink to={`/product/${el.id}`}>
             <Box
               h="300px"
+
               key={el.id}
               mt="20px"
               align="left"
@@ -115,9 +130,11 @@ const Fashion = () => {
               }}
             >
               <Image
+
                 w="160px"
                 objectFit={"scale-down"}
                 h={"180px"}
+
                 mt="-10px"
                 src={el.img}
                 m="auto"
@@ -138,7 +155,9 @@ const Fashion = () => {
               >
                 Price: {el.discountPrice}
               </Text>
+
             </Box></NavLink></Box>
+
           ))}
         </SimpleGrid>
         <Box
@@ -150,11 +169,16 @@ const Fashion = () => {
           justifyContent="center"
         >
           <Button
+
             disabled={page === 1}
+
             color="red"
             colorScheme="white"
             bg="white"
             variant="outline"
+
+            disabled={page === 1}
+
             onClick={() => setPage(page - 1)}
           >
             Previous
@@ -166,17 +190,25 @@ const Fashion = () => {
             </Text>
           </Box>
           <Button
+
             disabled={page >= 4}
+
             color="red"
             colorScheme="white"
             bg="white"
             variant="outline"
+
+            disabled={page >= 4}
+
             onClick={() => setPage(page + 1)}
           >
             Next
           </Button>
         </Box>
       </Box>
+
+      <Footer />
+
     </Box>
   );
 };

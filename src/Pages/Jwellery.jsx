@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Box,
@@ -33,6 +34,7 @@ const Fashion = () => {
 
   const lowToHigh = () => {
     setElectronicsData([]);
+
    
     let newData = [...electronicsData].sort((a, b) => {
      
@@ -178,8 +180,10 @@ const Fashion = () => {
           </Button>
         </Box>
       </Box>
+
     </Box>
   );
 };
 
 export default Fashion;
+

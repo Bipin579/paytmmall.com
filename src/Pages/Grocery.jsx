@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Box,
   Image,
@@ -181,3 +182,4 @@ const Fashion = () => {
 };
 
 export default Fashion;
+

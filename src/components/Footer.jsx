@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Footer.module.css";
-import { Box, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Image, Link, SimpleGrid, Text } from "@chakra-ui/react";
 import paytmmall from '../Utils/paytmmall.png';
 import {
   AiFillApple,
@@ -28,15 +28,15 @@ const Footer = () => {
       {/* ====================================ICONS PART =================================== */}
       <SimpleGrid className={styles.f2} columns={{base:1,md:2,lg:2}}>
         <Box className={styles.options}>
-          <a href="">About Us</a>
-          <a href="">Partner with us</a>
-          <a href="">Terms & Conditions</a>
-          <a href="">Blog</a>
-          <a href="">Media</a>
-          <a href="">24x7 Help</a>
-          <a href="">Grievance policy</a>
-          <a href="">Bug bounty</a>
-          <a href="">Return/Cancellation policy</a>
+          <Link to="">About Us</Link>
+          <Link to="">Partner with us</Link>
+          <Link to="">Terms & Conditions</Link>
+          <Link to="">Blog</Link>
+          <Link to="">Media</Link>
+          <Link to="">24x7 Help</Link>
+          <Link to="">Grievance policy</Link>
+          <Link to="">Bug bounty</Link>
+          <Link to="">Return/Cancellation policy</Link>
         </Box>
         <Box className={styles.icons}>
           <Box>

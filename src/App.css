@@ -13,6 +13,7 @@
   }
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +23,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
