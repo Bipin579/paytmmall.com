@@ -6,6 +6,8 @@ import {BsFillCartCheckFill} from "react-icons/bs";
 import {MdOutlineStars} from 'react-icons/md';
 import {VscWorkspaceTrusted} from 'react-icons/vsc';
 import {AiOutlineHeart} from 'react-icons/ai';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 const SingleProductPage = () => {
  
   const { id } = useParams();
@@ -30,6 +32,7 @@ const SingleProductPage = () => {
   return (
 
     <Box bg='#f4f4f4'>
+      <Navbar/>
      <Box fontSize='xl'>SingleProductPage</Box>
        <SimpleGrid columns={{base:1,sm:2,md:3,lg:3}} w='100%' mt='30px'>
           <Box p='20px'  display='flex' h='450px' bg='white'>
@@ -112,7 +115,7 @@ const SingleProductPage = () => {
           </GridItem>
         </SimpleGrid>
        
-
+    <Footer />
 </Box>
   )
 }

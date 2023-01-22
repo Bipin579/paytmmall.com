@@ -1,6 +1,8 @@
 import { Box, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 
 const FurnitureElectronics = () => {
   const [FurnitureData,setFurnitureData] =useState([])
@@ -15,8 +17,9 @@ const FurnitureElectronics = () => {
     getData()
   },[])
   return (
+    
     <div style={{border:"2px solid red"}}>
-
+    <Navbar />
     <Box display={"flex"} w="100%">
       <Box w={"20%"}>Sorting functionality</Box>
       <Box w={"80%"} b="2px solid blue">
@@ -38,7 +41,8 @@ const FurnitureElectronics = () => {
 }
  </SimpleGrid>
  </Box>
- </Box>
+      </Box>
+      <Footer />
   </div>
   )
 }

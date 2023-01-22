@@ -82,15 +82,16 @@
 }
 .nav_right {
   display: flex;
-  justify-content: space-around;
+  width: 30%;
+  justify-content: space-evenly;
   align-items: center;
   right: 12px;
   padding: 2px;
   background-color: white;
 }
-.nav_right div {
+/* .nav_right div {
   width: 28%;
-}
+} */
 .searchBar{
   margin-top: 8px;
   

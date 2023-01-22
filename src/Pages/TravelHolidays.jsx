@@ -1,8 +1,14 @@
 import React from 'react'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 
 const TravelHolidays = () => {
   return (
-    <div>TravelHolidays</div>
+    <div>
+      <Navbar/>
+      TravelHolidays
+      <Footer />
+    </div>
   )
 }
 

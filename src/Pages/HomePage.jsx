@@ -2,6 +2,8 @@ import "./Homepage.css";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Carosel } from "../components/Carousel.jsx";
 import {GrLinkNext,GrLinkPrevious} from 'react-icons/gr';
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const Homepage = () => {
 
@@ -20,6 +22,8 @@ const Homepage = () => {
   };
 
   return (
+    <>
+      <Navbar />
     <div id='main'>
       <div className="product-container">
         <Carosel />
@@ -269,7 +273,9 @@ const Homepage = () => {
           </GridItem>
         </Grid>
       </div>
-    </div>
+      </div>
+      <Footer />
+      </>
   );
 };
 
