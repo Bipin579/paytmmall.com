@@ -1,19 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteUser, getUsersList } from '../../Redux/Admin/action';
-import {Table,Thead,Tbody,Tfoot,Tr,Th,Td,TableContainer,Heading,IconButton,useToast} from '@chakra-ui/react'
-import {FiUserX} from 'react-icons/fi';
+import { deleteUser, getCarts, getOrders, getUsersList } from '../../Redux/Admin/action';
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Heading, IconButton, useToast } from '@chakra-ui/react'
+import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
-   const { isLoadingUserList, isErrorUserList, users } = useSelector(store => store.AdminReducer);
-   const orderRef=useRef(0);
-   const cartRef=useRef(0);
-   const totalRef=useRef(0);
-   const profitRef=useRef(0);
-   const dispatch = useDispatch();
-   const toast = useToast();
+  const { isLoadingUserList, isErrorUserList, users,orders,carts} = useSelector(store => store.AdminReducer);
+  let {totalProfit,total} = useSelector(store => store.AdminReducer);
+  const dispatch = useDispatch();
+  const toast = useToast();
 
-   const handleDelete =(user) => {
+  const handleDelete = (user) => {
     try {
       dispatch(deleteUser(user.id));
       toast({
@@ -32,20 +29,24 @@ const ManageUsers = () => {
         isClosable: true,
       })
     }
-   }
+  }
 
-   useEffect(() => {
-     dispatch(getUsersList)
-   }, []);
+  useEffect(() => {
+    dispatch(getUsersList)
+    dispatch(getOrders)
+    dispatch(getCarts)
+  }, []);
+  console.log(users)
+  // why my this componet is rednering 2 extra times?
+  // console.log('manage uses list page rendering')
 
   return (
     <div>
       <Heading size='md'>Manage Users</Heading>
       {isLoadingUserList && <h2>Loading...</h2>}
       {isErrorUserList && <h2>Error Occured while getting User list</h2>}
-        <div>
-          {users.length > 0 && 
-          <TableContainer>
+      <div> {users.length > 0 &&
+        <TableContainer>
           <Table variant='striped' colorScheme='teal'>
             <Thead>
               <Tr>
@@ -58,35 +59,36 @@ const ManageUsers = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {users.map((user)=>{
-                orderRef.current+=user.orders.length;
-                cartRef.current+=user.cart.length;
-                totalRef.current+=300;
-                profitRef.current+=100;
+              {users.map((user) => {
+                total += 300;
+                // user.forEach((orders)=>{
+                //   total
+                // }))
+                totalProfit += 100;
                 return <Tr key={user.id}>
-                <Td>{user.name}</Td>
-                <Td >{user.orders=0}</Td>
-                <Td>{user.cart=0}</Td>
-                <Td >{'₹'+300}</Td>
-                <Td >{'₹'+100}</Td>
-                <Td><IconButton aria-label='Delete database' onClick={()=>handleDelete(user)} icon={<FiUserX/>}/></Td>
+                  <Td>{user.name}</Td>
+                  <Td >{user.orders.length}</Td>
+                  <Td>{user.cart.length}</Td>
+                  <Td >{'₹' + 300}</Td>
+                  <Td >{'₹' + 100}</Td>
+                  <Td><IconButton aria-label='Delete database' onClick={() => handleDelete(user)} icon={<FiUserX />} /></Td>
                 </Tr>
               })}
             </Tbody>
             <Tfoot bg={'yellow.400'}>
               <Tr>
                 <Th>Total : {users.length}</Th>
-                <Th >Orders : {+orderRef.current}</Th>
-                <Th>Cart : {+cartRef.current}</Th>
-                <Th>Total : ₹{totalRef.current}</Th>
-                <Th>Profit : ₹{profitRef.current}</Th>
+                <Th >Orders : {orders.length}</Th>
+                <Th>Cart : {carts.length}</Th>
+                <Th>Total : ₹{total}</Th>
+                <Th>Profit : ₹{totalProfit}</Th>
                 <Th></Th>
-                </Tr>
+              </Tr>
             </Tfoot>
           </Table>
         </TableContainer>
-          }
-        </div>
+      }
+      </div>
     </div>
   )
 }

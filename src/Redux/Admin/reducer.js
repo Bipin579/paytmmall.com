@@ -25,6 +25,12 @@ import {
   GET_PRODUCT_DATA_FAILURE,
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
+  GET_CATEGORIES_SUCCESS,
+  GET_CATEGORIES_REQUEST,
+  GET_ORDERS_REQUEST,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_FAILURE,
+  GET_CARTS_SUCCESS,
 } from "./actionTypes";
 
 const inisitalState = {
@@ -37,7 +43,6 @@ const inisitalState = {
   isErrorProductDelete: false,
   isLoadingProductUpdate: false,
   isErrorProductUpdate: false,
-  orders: [],
   users: [],
   isLoadingUserList: false,
   isErrorUserList: false,
@@ -48,6 +53,15 @@ const inisitalState = {
   isErrorAdminList: false,
   isLoadingAdminAdd: false,
   isErrorAdminAdd: false,
+  totalCarts: 0,
+  carts:[],
+  totalProfit:0,
+  total:0,
+  categories:{allCategories:[],usersCategories:{}},
+  isLoadingCategories: false,
+  orders: [],
+  isLoadingOrders: false,
+  isErrorOrders: false,
 };
 
 const reducer = (state = inisitalState, { type, payload }) => {
@@ -111,6 +125,19 @@ const reducer = (state = inisitalState, { type, payload }) => {
       };
     case DELETE_ADMIN_FAILURE:
       return { ...state, isLoadingAdminDelete: false, isErrorAdminDelete: true };
+    case GET_CATEGORIES_REQUEST:
+      return { ...state, isLoadingCategories:true}  
+    case GET_CATEGORIES_SUCCESS:
+      return {...state,categories:{...state.categories,isLoadingCategories:false,allCategories:payload[0],usersCategories:payload[1]}}
+    case GET_ORDERS_REQUEST:
+      return { ...state, isLoadingOrders: true };
+    case GET_ORDERS_SUCCESS:
+      return { ...state, isLoadingOrders: false, orders: payload };
+    case GET_ORDERS_FAILURE:
+      return { ...state, isLoadingOrders: false, isErrorOrders: true };    
+    case GET_CARTS_SUCCESS:
+      console.log(payload)
+      return { ...state,carts: payload}; 
     default:
       return state;
   }

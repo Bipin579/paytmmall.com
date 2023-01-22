@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Avatar, HStack, Link, IconButton, Menu, MenuButton, MenuList, MenuItem, MenuDivider, useDisclosure, useColorModeValue, Heading } from '@chakra-ui/react';
+import { Box, Flex, Avatar, HStack, Link, IconButton, Menu, MenuButton, MenuList, MenuItem, MenuDivider, useDisclosure, useColorModeValue,Image } from '@chakra-ui/react';
 import { CloseButton, VStack, Icon, Drawer, DrawerContent, Text } from '@chakra-ui/react';
-import { FiHome, FiCompass, FiMenu, FiBell, FiChevronDown, FiUsers, FiPlus, FiShoppingCart} from 'react-icons/fi';
+import { FiHome, FiCompass, FiMenu, FiBell, FiChevronDown, FiUsers, FiPlus, FiShoppingCart, FiActivity} from 'react-icons/fi';
 import ManageAdmins from './ManageAdmins';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
 import ManageProducts from './ManageProducts';
 import AddProducts from './AddProducts';
 import AddAdmins from './AddAdmins';
+import Analyse from './Analyse';
 
 const LinkItems = [
     { name: 'Dashboard', compName: 'Dashboard',heading:'Dashboard', icon: FiHome },
@@ -15,7 +16,8 @@ const LinkItems = [
     { name: 'Manage Products', compName: 'ManageProducts',heading:'Manage Products', icon: FiCompass },
     { name: 'Manage Orders', compName: 'ManageOrders',heading:'Manage Products', icon: FiShoppingCart },
     { name: 'Add Admins', compName: 'AddAdmins',heading:'Add Admins ', icon: FiPlus },
-    { name: 'Manage Admins', compName: 'ManageAdmins',heading:'Manage Admins', icon: FiUsers }
+    { name: 'Manage Admins', compName: 'ManageAdmins',heading:'Manage Admins', icon: FiUsers },
+    {name: "Analyse",compName:"Analyse",heading:"Analyse", icon:FiActivity}
 ];
 
 function SidebarWithHeader({ children }) {
@@ -28,6 +30,7 @@ function SidebarWithHeader({ children }) {
         else if (compName === 'ManageProducts')return  <ManageProducts />
         else if (compName === 'AddProducts')return  <AddProducts />
         else if (compName === 'AddAdmins')return  <AddAdmins />  
+        else if (compName === 'Analyse')return  <Analyse />  
     }
 
     useEffect(()=>{
@@ -45,10 +48,8 @@ function SidebarWithHeader({ children }) {
                 pos="fixed"
                 h="full"
                 {...rest}>
-                <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-                    {/* <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">Ritik</Text> */}
-                    <Avatar size='full' src={'https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-01-19/RCT211_mall_logo_596529.jpeg'}/>
-                    <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+                <Flex h="20" alignItems={"center"} justifyContent="center">
+                    <Image width={'20'} src={'https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-01-22/mall_admin_logo_407958.png'}/>
                 </Flex>
                 {LinkItems.map((link) => (
                     <NavItem onClick={() =>setComp(link.compName)} key={link.name} icon={link.icon}>
@@ -63,14 +64,7 @@ function SidebarWithHeader({ children }) {
         <Box>
             <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
                 <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
-                <Drawer
-                    autoFocus={false}
-                    isOpen={isOpen}
-                    placement="left"
-                    onClose={onClose}
-                    returnFocusOnClose={false}
-                    onOverlayClick={onClose}
-                    size="full">
+                <Drawer autoFocus={false} isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
                     <DrawerContent>
                         <SidebarContent onClose={onClose} />
                     </DrawerContent>
