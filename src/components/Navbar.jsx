@@ -7,7 +7,6 @@ import {
   Flex,
   VStack,
   InputGroup,
-  Input,
 } from "@chakra-ui/react";
 import cartbag from "./cartbag.png";
 import list from "./list.png";
