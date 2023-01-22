@@ -2,10 +2,11 @@
 .satyam{
   position: relative;
   overflow: hidden;
-  padding: 26px;
+  /* padding: 26px; */
 }
 .product-carousel {
-  padding: 0 10px;
+  padding: 0 20px;
+  padding-right: 30px;
   display: flex;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -13,11 +14,8 @@
   
   .pre-btn,
   .next-btn {
-    border: none;
-    width: 60px;
-    height: auto;
     position: absolute;
-    top: 35.5%;
+    top: 16%;
     display: flex;
     background-color: rgba(0, 0, 0, 0);
   }
@@ -41,13 +39,11 @@
   
   .pre-btn2,
   .next-btn2 {
-    border: none;
-    width: 60px;
-    height: auto;
     position: absolute;
-    top: 28%;
+    top: 18%;
     display: flex;
     background-color: rgba(0, 0, 0, 0);
+
   }
   
   .next-btn2 {
@@ -70,11 +66,8 @@
   
   .pre-btn3,
   .next-btn3 {
-    border: none;
-    width: 60px;
-    height: auto;
     position: absolute;
-    top: 32%;
+    top: 18%;
     display: flex;
     background-color: rgba(0, 0, 0, 0);
   }
