@@ -35,7 +35,7 @@ const fetchData=(searchValue)=>{
   .then((res)=>res.json())
   .then((res)=>{
     setData(res)
-    console.log( " debounce data ",res);
+ //   console.log( " debounce data ",res);
   })
 }
 
