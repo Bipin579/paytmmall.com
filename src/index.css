@@ -25,3 +25,12 @@ code {
   background-color: rgb(255, 51, 0);
   border-radius: 50%;
 }
+.filter-div{
+  /* borderRadius='10px' border='1px solid gray' align='center' bg='white' */
+  background-color:aqua ;
+  padding: 3px;
+  color: gray;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+}

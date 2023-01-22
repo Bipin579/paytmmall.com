@@ -29,22 +29,24 @@ const Navbar = () => {
 
   // set Debouncing in input tag
 
-  const url = `https://paytmmallserver.onrender.com/product`;
-  const ref = useRef(null);
-  const [debounceDiv, setDebounceDiv] = useState(false);
-  const [data, setData] = useState([]);
-  const [searchData, setSearchData] = useState("");
-  useEffect(() => {
-    fetchData(searchData);
-  }, [searchData]);
-  const fetchData = (searchValue) => {
-    fetch(`${url}?_limit=5&q=${searchValue}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res);
-        console.log(" debounce data ", res);
-      });
-  };
+
+const url = `https://paytmmallserver.onrender.com/product`
+const ref = useRef(null)
+const [debounceDiv, setDebounceDiv] = useState(false)
+const [data, setData] = useState([])
+const [searchData, setSearchData] = useState("");
+useEffect(()=>{
+  fetchData(searchData);
+},[searchData]);
+const fetchData=(searchValue)=>{
+  fetch(`${url}?_limit=5&q=${searchValue}`)
+  .then((res)=>res.json())
+  .then((res)=>{
+    setData(res)
+ //   console.log( " debounce data ",res);
+  })
+}
+
 
   const debounce = (fn, timeout) => {
     let timerid;
