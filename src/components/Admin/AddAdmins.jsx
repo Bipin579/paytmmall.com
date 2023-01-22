@@ -38,7 +38,7 @@ const AddAdmins = () => {
   }
   return (
     <div>
-      <Heading size='md'>Add Products</Heading>
+      <Heading size='md'>Add Admin</Heading>
       <form onSubmit={formSubmitHandler}>
         <FormControl isRequired>
           {/* If I am not giving unique id than it's showing error but it's not showing the same in AddProducts form */}
