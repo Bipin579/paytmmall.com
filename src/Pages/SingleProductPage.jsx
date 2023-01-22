@@ -8,28 +8,53 @@ import {VscWorkspaceTrusted} from 'react-icons/vsc';
 import {AiOutlineHeart} from 'react-icons/ai';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, getUsers } from '../Redux/Auth/action';
+import Loading from "../components/Loading"
 const SingleProductPage = () => {
  
   const { id } = useParams();
-  console.log(id);
-  const [singleData, setSingleData] = useState([]);
+  // console.log(id);
+  const [singleData, setSingleData] = useState({});
+  const dispatch = useDispatch();
+  const isLoading = useSelector((store) => store.AuthReducer.isLoading)
+  
+  const users = useSelector(store => store.AuthReducer.users)
+  let userid = localStorage.getItem("userId")
+  let userData = users.find((el) => {
+    return el.id === +userid;
+  })
+  
 
-  useEffect(() => {
-      singleProductData();
-  }, [id])
+
+ 
   const singleProductData = () => {
      
-        axios.get(`https://paytmmallserver.onrender.com/product/${id}`).then((res) => {
-            setSingleData(res.data);
-          console.log(singleData);
-        }).catch((err) => {
-           console.log(err);
-         })   
-      }   
+    axios.get(`https://paytmmallserver.onrender.com/product/${id}`).then((res) => {
+      setSingleData(res.data);
+      // console.log(singleData);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  
+  const sendCart = () => {
    
+    console.log("1",userData);
+    dispatch(addToCart(userid,userData,singleData)).then((res) => {
+      dispatch(getUsers)
+    });
+  }
+  useEffect(() => {
+    dispatch(getUsers)
+  }, [])
+  useEffect(() => {
+    singleProductData();
+  }, [id])
+
       
   
-  return (
+  return isLoading? <Loading /> : (
 
     <Box bg='#f4f4f4'>
       <Navbar/>
@@ -54,7 +79,7 @@ const SingleProductPage = () => {
               
               </Box><Text fontSize='xs' color='gray'>inclusive of all Taxes</Text>
               <Box mt='60px'>
-                  <Button  className='addtocart' color='white' m='10px'  background='#ef4e28' variant='solid' w='70%'>  Add To Cart  </Button>
+                  <Button  className='addtocart' color='white' m='10px'  background='#ef4e28' variant='solid' w='70%' onClick={sendCart}>  Add To Cart  </Button>
                   </Box>
               </Box>
               <Box bg='#f4f4f4' m='40px' p='20px'borderRadius='8px' border='1px solid gray' align='left' w={{base:'260px',sm:'250px',md:'200px' ,lg:'max-content'}} h={{base:'250px',sm:'300px',md:'max-content',lg:'max-content'}}>

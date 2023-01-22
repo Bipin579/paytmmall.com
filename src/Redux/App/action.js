@@ -40,7 +40,7 @@ export const getCarosels = (dispatch) => {
     dispatch(getCaroselsDataRequest())
     axios.get(`https://paytmmallserver.onrender.com/allcarosels`).then((res) => {
         dispatch(getCaroselsDataSuccess(res.data))
-        console.log(res.data);
+        // console.log(res.data);
     }).catch((err) => {
         dispatch(getCaroselsDataFailure());
         console.log(err);

@@ -44,7 +44,7 @@ function Login() {
     let check = users.find((el) => {
       return el.email === email && el.password === password;
     });
-    // console.log(check);
+    console.log(check);
     localStorage.setItem("userId",check.id)
     if (check) {
       toast({
