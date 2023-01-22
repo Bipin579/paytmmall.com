@@ -14,7 +14,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-const Fashion = () => {
+const Furniture = () => {
   const [electronicsData, setElectronicsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -82,10 +82,10 @@ const Fashion = () => {
         w="100%"
         h="100px"
       >
-        <Heading>Furnitures and Electronics</Heading>
+        <Heading>Furnitures and electronics </Heading>
       </Box>
 
-      {/* sidebar */}
+      {/* ====================sidebar===================================== */}
 
       <Box align="right" bg=" #f1f6fd">
         <Box align="left" p="20px" w="20%" pos="fixed" l="0">
@@ -188,5 +188,5 @@ const Fashion = () => {
   );
 };
 
-export default Fashion;
+export default Furniture;
 
