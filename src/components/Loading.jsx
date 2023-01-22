@@ -3,7 +3,7 @@ import React from 'react'
 
 const Loading = () => {
   return (
-      <Box display={"flex"} justifyContent="center" alignItems={"center"} p={"10%"} maxW="6xl" m={"auto"}>
+      <Box display={"flex"} justifyContent="center" alignItems={"center"} p={"10%"} maxW="3xl" m={"auto"}>
           <Image src='https://i.gifer.com/YVPG.gif' w="full" />
     </Box>
   )

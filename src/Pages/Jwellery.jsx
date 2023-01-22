@@ -2,6 +2,7 @@
 import { Badge, Box, Grid, GridItem, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Navbar from '../components/Navbar'
 
 const Jwellery = () => {
 
@@ -19,7 +20,7 @@ const Jwellery = () => {
   return (
 
     <div style={{border:"2px solid red"}}>
-
+      <Navbar />
       <Box display={"flex"} w="100%">
         <Box w={"20%"}>Sorting functionality</Box>
         <Box w={"80%"} b="2px solid blue">
@@ -41,7 +42,8 @@ const Jwellery = () => {
   }
    </SimpleGrid>
    </Box>
-   </Box>
+      </Box>
+      <Navbar />
     </div>
   )
 }
