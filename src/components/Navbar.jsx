@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../Navbar.css";
-import {
-  Box,
-  Text,
-  Image,
-  Flex,
-  VStack,
-  InputGroup,
-} from "@chakra-ui/react";
+import { Box, Text, Image, Flex, VStack, InputGroup } from "@chakra-ui/react";
 import cartbag from "./cartbag.png";
 import list from "./list.png";
 import { Link, NavLink } from "react-router-dom";
@@ -15,9 +8,15 @@ import image from "../Utils/image.png";
 import menu from "../Utils/menu.png";
 import search from "../Utils/search.png";
 import { BiSearch } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../Redux/Auth/action";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
+  const dispatch = useDispatch();
 
+  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+  // const isAuth = localStorage.getItem("isAuth")|| false
+  console.log(isAuth);
   const checkScroll = () => {
     if (window.scrollY >= 70) {
       setIsSticky(true);
@@ -42,7 +41,7 @@ const Navbar = () => {
       .then((res) => res.json())
       .then((res) => {
         setData(res);
-        console.log(" debounce data ", res);
+        // console.log(" debounce data ", res);
       });
   };
 
@@ -67,6 +66,10 @@ const Navbar = () => {
       setDebounceDiv(false);
     }
   });
+
+  const handleAuth = () => {
+    dispatch(setLogout);
+  };
 
   return (
     <Box>
@@ -212,7 +215,7 @@ const Navbar = () => {
                         _hover={{ bg: "#F5F8FF" }}
                       >
                         <Box>
-                          <Image w="50px"  src={item.img} />
+                          <Image w="20px" src={item.img} />
                         </Box>
                         <Box color={"#212121"}>{item.description}</Box>
                       </Flex>
@@ -255,19 +258,34 @@ const Navbar = () => {
               <Text fontSize={{ base: "6px", md: "md", lg: "md" }}>Cart</Text>
             </Box>
           </Link>
-
-          <Link to={"/login"}>
+          {isAuth ? (
             <Box className="user" w={{ base: "33%", md: "30%", lg: "33%" }}>
               <Image
                 w={{ base: "10px", md: "20px", lg: "20px" }}
                 src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
                 alt=""
               />
-              <Text fontSize={{ base: "6px", sm: "md", lg: "md" }}>
-                Login/SignUp
+              <Text
+                onClick={handleAuth}
+                fontSize={{ base: "6px", sm: "md", lg: "md" }}
+              >
+                Logout
               </Text>
             </Box>
-          </Link>
+          ) : (
+            <Link to={"/login"}>
+              <Box className="user" w={{ base: "33%", md: "30%", lg: "33%" }}>
+                <Image
+                  w={{ base: "10px", md: "20px", lg: "20px" }}
+                  src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
+                  alt=""
+                />
+                <Text fontSize={{ base: "6px", sm: "md", lg: "md" }}>
+                  Login/SignUp
+                </Text>
+              </Box>
+            </Link>
+          )}
         </Box>
       </Box>
     </Box>

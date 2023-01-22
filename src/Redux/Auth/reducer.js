@@ -1,4 +1,7 @@
 import {
+  ADD_CART_FAILURE,
+  ADD_CART_REQUEST,
+  ADD_CART_SUCCESS,
   GET_USER_FAILURE,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -9,16 +12,13 @@ import {
   SET_LOGOUT_REQUEST,
 } from "./actionTypes";
 
-
+let key = JSON.parse(localStorage.getItem("isAuth"));
 const initialState = {
   users: [],
-  isAuth: localStorage.getItem("isAuth") || false,
+  isAuth: key || false,
   isLoading: false,
   isError: false,
 };
-
-
-
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -35,9 +35,15 @@ export const reducer = (state = initialState, { type, payload }) => {
     case GET_USER_FAILURE:
       return { ...state, isLoading: false, isError: true };
     case SET_LOGIN_REQUEST:
-      return { ...state, isAuth:true};
+      return { ...state, isAuth: true };
     case SET_LOGOUT_REQUEST:
       return { ...state, isAuth: false };
+    case ADD_CART_REQUEST:
+      return { ...state, isLoading: true };
+    case ADD_CART_SUCCESS:
+      return { ...state, isLoading: false };
+    case ADD_CART_FAILURE:
+      return { ...state, isLoading: false, isError: true };
     default:
       return state;
   }
