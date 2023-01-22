@@ -12,6 +12,8 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const Fashion = () => {
   const [electronicsData, setElectronicsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +73,7 @@ const Fashion = () => {
     <Loading />
   ) : (
     <Box>
+       <Navbar />
       <Box
         boxShadow="md"
         display="flex"
@@ -179,6 +182,7 @@ const Fashion = () => {
         </Box>
 
       </Box>
+      <Footer />
     </Box>
 
   );

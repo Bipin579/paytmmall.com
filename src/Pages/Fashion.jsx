@@ -177,7 +177,7 @@ const Fashion = () => {
             bg="white"
             variant="outline"
 
-            disabled={page === 1}
+          
 
             onClick={() => setPage(page - 1)}
           >
@@ -198,7 +198,7 @@ const Fashion = () => {
             bg="white"
             variant="outline"
 
-            disabled={page >= 4}
+          
 
             onClick={() => setPage(page + 1)}
           >
