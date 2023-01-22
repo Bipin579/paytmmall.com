@@ -16,7 +16,7 @@ const ManageUsers = () => {
         title: 'User Deleted',
         description: `${user.name} has been deleted successfully`,
         status: 'success',
-        duration: 6000,
+        duration: 4000,
         isClosable: true,
       })
     } catch (error) {
@@ -49,7 +49,7 @@ const ManageUsers = () => {
                 <Th isNumeric>Orders</Th>
                 <Th>Cart</Th>
                 <Th>Total</Th>
-                <Th>Profilt</Th>
+                <Th>Profit</Th>
                 <Th>Delete</Th>
               </Tr>
             </Thead>

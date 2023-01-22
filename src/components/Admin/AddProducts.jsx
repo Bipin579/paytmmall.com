@@ -5,7 +5,7 @@ import { addProduct } from '../../Redux/Admin/action';
 
 const AddProducts = () => {
   const dispatch = useDispatch();
-  const initForm={name:'',brand:'',image:'',originalPrice:'',discountPrice:'',category:''}
+  const initForm={description:'',brand:'',img:'',originalPrice:'',discountPrice:'',category:''}
   const toast=useToast();
   // If we want to implement isRequired to only specific input then we have to create single FormControl in particular element or input & have to use single state for their values as below:- 
   // const [isNameInvalid,setIsNameInvalid]=false;
@@ -23,19 +23,22 @@ const AddProducts = () => {
 
   const formSubmitHandler=(e)=>{
     e.preventDefault();
+    const discount=form.originalPrice-form.discountPrice;
+    const discountPercent=discount/form.originalPrice*100;
+    form.originalPrice=`${form.originalPrice}-${discountPercent.toFixed(2)}%`
     try {
       dispatch(addProduct(form))
       toast({
         title: 'Product Added',
-        description: `${form.name} has been added successfully`,
+        description: `${form.description} has been added successfully`,
         status: 'success',
         duration: 6000,
         isClosable: true,
       })
-    } catch (error) {
+    }catch (error) {
       toast({
         title: 'Error while adding',
-        description: `${form.name} has not added`,
+        description: `${form.description} has not added`,
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -50,11 +53,11 @@ const AddProducts = () => {
       <form onSubmit={formSubmitHandler}>
       <FormControl isRequired>
         <FormLabel>Product Name</FormLabel>
-        <Input type='text' name='name' background='#fff' htmlSize={45} width='auto' onChange={formChangeHandler} value={form.name}  />
+        <Input type='text' name='description' background='#fff' htmlSize={45} width='auto' onChange={formChangeHandler} value={form.description}  />
         <FormLabel>Product Brand</FormLabel>
         <Input type='text' name='brand' background='#fff' onChange={formChangeHandler} value={form.brand} />
         <FormLabel>Product Image Link</FormLabel>
-        <Input type='url' name='image' background='#fff' onChange={formChangeHandler} value={form.image} />
+        <Input type='url' name='img' background='#fff' onChange={formChangeHandler} value={form.img} />
         <FormLabel>Product Original Price</FormLabel>
         <Input type='number' name='originalPrice' background='#fff' onChange={formChangeHandler} value={form.originalPrice} />
         <FormLabel>Product Discount Price</FormLabel>

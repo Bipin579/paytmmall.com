@@ -13,8 +13,6 @@ export const getProductDataFailure = () => {
     return {type: GET_PRODUCT_DATA_FAILURE}
 }
 
-
-
 export const getCaroselsDataRequest = () => {
     return {type: GET_PRODUCT_DATA_REQUEST}
 }
@@ -26,7 +24,6 @@ export const getCaroselsDataSuccess = (payload) => {
 export const getCaroselsDataFailure = () => {
     return {type: GET_CAROSELS_DATA_REQUEST}
 }
-
 
 export const getProducts = (dispatch) => {
     dispatch(getProductDataRequest())
