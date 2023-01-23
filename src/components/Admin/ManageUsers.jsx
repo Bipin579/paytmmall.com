@@ -6,7 +6,7 @@ import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
   const { isLoadingUserList, isErrorUserList, users,orders,carts} = useSelector(store => store.AdminReducer);
-  let {totalProfit,total} = useSelector(store => store.AdminReducer);
+  let {total,totalProfit} = useSelector(store => store.AdminReducer);
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -36,7 +36,6 @@ const ManageUsers = () => {
     dispatch(getOrders)
     dispatch(getCarts)
   }, []);
-  console.log(users)
   // why my this componet is rednering 2 extra times?
   // console.log('manage uses list page rendering')
 
@@ -47,7 +46,7 @@ const ManageUsers = () => {
       {isErrorUserList && <h2>Error Occured while getting User list</h2>}
       <div> {users.length > 0 &&
         <TableContainer>
-          <Table variant='striped' colorScheme='teal'>
+          <Table variant='striped' colorScheme='teal' size={'lg'}>
             <Thead>
               <Tr>
                 <Th>User</Th>
@@ -60,16 +59,15 @@ const ManageUsers = () => {
             </Thead>
             <Tbody>
               {users.map((user) => {
-                total += 300;
-                // user.forEach((orders)=>{
-                //   total
-                // }))
+                let Singletotal=0;
+                user.orders.forEach((order=>Singletotal+=(+order.discountPrice)));
+                total += Singletotal;
                 totalProfit += 100;
                 return <Tr key={user.id}>
                   <Td>{user.name}</Td>
                   <Td >{user.orders.length}</Td>
                   <Td>{user.cart.length}</Td>
-                  <Td >{'₹' + 300}</Td>
+                  <Td >{'₹' + Singletotal}</Td>
                   <Td >{'₹' + 100}</Td>
                   <Td><IconButton aria-label='Delete database' onClick={() => handleDelete(user)} icon={<FiUserX />} /></Td>
                 </Tr>
