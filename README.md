@@ -1,7 +1,7 @@
 
 <h1 align="center" id="title">Paytm mall</h1>
 
-<p align="center"><img src="https://iili.io/HcHUepe.png" alt="project-image" width="220" height="200/"></p>
+
 
 <p id="description">Paytm Mall - India's Leading Online Shopping Experience, Brought to You by Paytm. Online shopping with Paytm Mall is quick, convenient and trouble-free. You can shop for the desired product right from the comfort of your home and get them delivered straight to your doorstep.<br><br><b>This is a collaborative project of 4 members</b><br><br>- Bipin Singh (Team Lead)<br>- Satyam Kumar<br>- Abhay Kumar<br>- Ritik Singh</p>
 
