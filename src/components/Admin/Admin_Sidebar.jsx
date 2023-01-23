@@ -136,8 +136,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                             _focus={{ boxShadow: 'none' }}>
                             <HStack>
                                 <Avatar
-                                    size={'sm'}
-                                    src={'https://avatars.githubusercontent.com/u/72447250?v=4'}
+                                    size={'sm'} src={'https://avatars.githubusercontent.com/u/72447250?v=4'}
                                 />
                                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                                     <Text fontSize="sm">Ritik</Text>

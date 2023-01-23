@@ -1,7 +1,7 @@
 import { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getCarts, getOrders, getUsersList } from '../../Redux/Admin/action';
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Heading, IconButton, useToast } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Heading, IconButton, useToast,CircularProgress } from '@chakra-ui/react'
 import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
@@ -42,7 +42,7 @@ const ManageUsers = () => {
   return (
     <div>
       <Heading size='md'>Manage Users</Heading>
-      {isLoadingUserList && <h2>Loading...</h2>}
+      {isLoadingUserList && <CircularProgress isIndeterminate color='green.300' />}
       {isErrorUserList && <h2>Error Occured while getting User list</h2>}
       <div> {users.length > 0 &&
         <TableContainer>

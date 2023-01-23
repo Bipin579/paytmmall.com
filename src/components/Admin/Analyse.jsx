@@ -1,5 +1,5 @@
 import Chart from "react-google-charts";
-import { Heading,Box } from "@chakra-ui/react";
+import { Heading,Box ,CircularProgress} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCategories } from "../../Redux/Admin/action";
@@ -25,13 +25,14 @@ const Analyse = () => {
   useEffect(()=>{
     dispatch(getCategories);
   },[])
-// console.log(isLoadingCategories)
+
 // console.log(Object.keys(categories)[0].valueOf('allCategories'))
   return (
     <div>
       <Heading size='lg'>Analyse</Heading>
-      {/* {isLoadingCategories && <h2>Loading...</h2>} */}
-      {Object.keys(categories) &&  <Box width={'60vw'}>
+      {isLoadingCategories && <CircularProgress isIndeterminate color='green.300' />}
+      {/*How to know in the object is value is empty or not */}
+      {<Box width={'60vw'}>
       <Chart chartType="PieChart" data={data1}  height={'60vh'} options={{title:"Top Buyest Product Category's"}} />
       </Box>}
     </div>

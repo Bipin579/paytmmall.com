@@ -31,6 +31,9 @@ import {
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAILURE,
   GET_CARTS_SUCCESS,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAILURE,
 } from "./actionTypes";
 
 const inisitalState = {
@@ -62,6 +65,8 @@ const inisitalState = {
   orders: [],
   isLoadingOrders: false,
   isErrorOrders: false,
+  isLoadingOrderUpdate: false,
+  isErrorOrderUpdate: false
 };
 
 const reducer = (state = inisitalState, { type, payload }) => {
@@ -128,13 +133,19 @@ const reducer = (state = inisitalState, { type, payload }) => {
     case GET_CATEGORIES_REQUEST:
       return { ...state, isLoadingCategories:true}  
     case GET_CATEGORIES_SUCCESS:
-      return {...state,categories:{...state.categories,isLoadingCategories:false,allCategories:payload[0],usersCategories:payload[1]}}
+      return {...state,isLoadingCategories:false,categories:{...state.categories,allCategories:payload[0],usersCategories:payload[1]}}
     case GET_ORDERS_REQUEST:
       return { ...state, isLoadingOrders: true };
     case GET_ORDERS_SUCCESS:
       return { ...state, isLoadingOrders: false, orders: payload };
     case GET_ORDERS_FAILURE:
       return { ...state, isLoadingOrders: false, isErrorOrders: true };    
+    // case UPDATE_ORDER_REQUEST:
+    //   return { ...state, isLoadingOrderUpdate: true };
+    // case UPDATE_ORDER_SUCCESS:
+    //   return { ...state, isLoadingOrderUpdate: false, orders:state.orders };
+    // case UPDATE_ORDER_FAILURE:
+    //   return { ...state, isLoadingOrderUpdate: false, isErrorOrderUpdate: true };    
     case GET_CARTS_SUCCESS:
       return { ...state,carts: payload}; 
     default:
