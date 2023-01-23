@@ -136,7 +136,6 @@ const reducer = (state = inisitalState, { type, payload }) => {
     case GET_ORDERS_FAILURE:
       return { ...state, isLoadingOrders: false, isErrorOrders: true };    
     case GET_CARTS_SUCCESS:
-      console.log(payload)
       return { ...state,carts: payload}; 
     default:
       return state;

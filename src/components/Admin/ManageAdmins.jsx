@@ -33,6 +33,7 @@ const ManageAdmins = () => {
    useEffect(() => {
      dispatch(getAdminList)
    }, []);
+   
   return (
     <div>
       <Heading size='md'>Manage Admins</Heading>
@@ -41,7 +42,7 @@ const ManageAdmins = () => {
         <div>
           {admins.length > 0 && 
           <TableContainer>
-          <Table variant='striped' colorScheme='teal'>
+          <Table variant='striped' colorScheme='teal' size={'lg'}>
             <Thead>
               <Tr>
                 <Th>Photo</Th>
