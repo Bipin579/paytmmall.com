@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdmin, getAdminList } from '../../Redux/Admin/action';
-import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast,Image} from '@chakra-ui/react'
+import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast,Image,CircularProgress} from '@chakra-ui/react'
 import {FiUserX} from 'react-icons/fi';
 
 const ManageAdmins = () => {
@@ -37,7 +37,7 @@ const ManageAdmins = () => {
   return (
     <div>
       <Heading size='md'>Manage Admins</Heading>
-      {isLoadingAdminList && <h2>Loading...</h2>}
+      {isLoadingAdminList && <CircularProgress isIndeterminate color='green.300' />}
       {isErrorAdminList && <h2>Error Occured while getting Admin list</h2>}
         <div>
           {admins.length > 0 && 

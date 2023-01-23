@@ -29,53 +29,54 @@ import {
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAILURE,
   GET_CARTS_SUCCESS,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAILURE,
 } from "./actionTypes";
 import axios from "axios";
 
 const getProductDataRequest = () => ({ type: GET_PRODUCT_DATA_REQUEST });
-const getProductDataSuccess = (payload) => ({type: GET_PRODUCT_DATA_SUCCESS,payload});
+const getProductDataSuccess = (payload) => ({ type: GET_PRODUCT_DATA_SUCCESS, payload });
 const getProductDataFailure = () => ({ type: GET_PRODUCT_DATA_FAILURE });
 const addProductRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addProductSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addProductFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 const deleteProductRequest = () => ({ type: DELETE_PRODUCT_REQUEST });
-const deleteProductSuccess = (payload) => ({type: DELETE_PRODUCT_SUCCESS,payload});
+const deleteProductSuccess = (payload) => ({ type: DELETE_PRODUCT_SUCCESS, payload });
 const deleteProductFailure = () => ({ type: DELETE_PRODUCT_FAILURE });
 const updateProductRequest = () => ({ type: UPDATE_PRODUCT_REQUEST });
-const updateProductSuccess = (payload) => ({type: UPDATE_PRODUCT_SUCCESS,payload});
+const updateProductSuccess = (payload) => ({ type: UPDATE_PRODUCT_SUCCESS, payload });
 const updateProductFailure = () => ({ type: UPDATE_PRODUCT_FAILURE });
 const getUserListRequest = () => ({ type: GET_USERLIST_REQUEST });
-const getUserListSuccess = (payload) => ({type: GET_USERLIST_SUCCESS,payload});
+const getUserListSuccess = (payload) => ({ type: GET_USERLIST_SUCCESS, payload });
 const getUserListFailure = () => ({ type: GET_USERLIST_FAILURE });
 const deleteUserRequest = () => ({ type: DELETE_USER_REQUEST });
 const deleteUserSuccess = (payload) => ({ type: DELETE_USER_SUCCESS, payload });
 const deleteUserFailure = () => ({ type: DELETE_USER_FAILURE });
 const getAdminListRequest = () => ({ type: GET_ADMINLIST_REQUEST });
-const getAdminListSuccess = (payload) => ({type: GET_ADMINLIST_SUCCESS,payload});
+const getAdminListSuccess = (payload) => ({ type: GET_ADMINLIST_SUCCESS, payload });
 const getAdminListFailure = () => ({ type: GET_ADMINLIST_FAILURE });
 const addAdminRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addAdminSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addAdminFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 const deleteAdminRequest = () => ({ type: DELETE_ADMIN_REQUEST });
-const deleteAdminSuccess = (payload) => ({type: DELETE_ADMIN_SUCCESS,payload});
+const deleteAdminSuccess = (payload) => ({ type: DELETE_ADMIN_SUCCESS, payload });
 const deleteAdminFailure = () => ({ type: DELETE_ADMIN_FAILURE });
 const getCategoriesRequest = () => ({ type: GET_CATEGORIES_REQUEST });
-const getCategoriesSuccess = (payload) => ({type: GET_CATEGORIES_SUCCESS,payload});
+const getCategoriesSuccess = (payload) => ({ type: GET_CATEGORIES_SUCCESS, payload });
 const getOrdersRequest = () => ({ type: GET_ORDERS_REQUEST });
 const getOrdersSuccess = (payload) => ({ type: GET_ORDERS_SUCCESS, payload });
 const getOrdersFailure = () => ({ type: GET_ORDERS_FAILURE });
-const getCartsSuccess=(payload)=> ({ type: GET_CARTS_SUCCESS,payload})
+const updateOrderRequest = () => ({ type: UPDATE_ORDER_REQUEST });
+const updateOrderSuccess = (payload) => ({ type: UPDATE_ORDER_SUCCESS, payload });
+const updateOrderFailure = () => ({ type: UPDATE_ORDER_FAILURE });
+const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload })
 
 export const getProducts = (dispatch) => {
   dispatch(getProductDataRequest());
-  axios
-    .get(`https://paytmmallserver.onrender.com/product`)
-    .then((res) => {
-      dispatch(getProductDataSuccess(res.data));
-    })
+  axios.get(`https://paytmmallserver.onrender.com/product`).then((res) => { dispatch(getProductDataSuccess(res.data)) })
     .catch((err) => {
       dispatch(getProductDataFailure());
-      console.log(err);
     });
 };
 
@@ -152,10 +153,7 @@ export const getAdminList = async (dispatch) => {
 export const addAdmin = (admin) => async (dispatch) => {
   dispatch(addAdminRequest());
   try {
-    let { data } = await axios.post(
-      "https://paytmmallserver.onrender.com/admins",
-      admin
-    );
+    let { data } = await axios.post("https://paytmmallserver.onrender.com/admins", admin);
     dispatch(addAdminSuccess(data));
     return data;
   } catch (error) {
@@ -187,7 +185,6 @@ const getAllCategories = async () => {
   return categories;
 };
 export const getCategories = async (dispatch) => {
-  // https://paytmmallserver.onrender.com/users
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();
   const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
@@ -204,9 +201,7 @@ export const getCategories = async (dispatch) => {
 export const getOrders = async (dispatch) => {
   dispatch(getOrdersRequest());
   try {
-    const { data } = await axios.get(
-      "https://paytmmallserver.onrender.com/users"
-    );
+    const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
     let ordersDetails = [];
     data.forEach(({ orders }) =>
       orders.forEach((o) => {
@@ -218,53 +213,61 @@ export const getOrders = async (dispatch) => {
     dispatch(getOrdersFailure(error));
   }
 };
-export const getCarts= async (dispatch) => {
+
+export const pendingOrder = (userId, id) => async (dispatch) => {
+  const { data } = await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
+  let updatedOrders = [];
+  data.orders.forEach((order) => {
+    if (order.id === id) {
+      const updateOrder = { ...order, status: 'Delayed' }
+      updatedOrders.push(updateOrder);
+    } else {
+      updatedOrders.push(order);
+    }
+  });
+  // for now I am dispatching again the orders for UI Updation 
+  const res = await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, { orders: updatedOrders });
+  dispatch(getOrders)
+}
+
+export const passOrder = (userId, id) => async (dispatch) => {
+  const { data } = await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
+  let updatedOrders = [];
+  data.orders.forEach((order) => {
+    if (order.id === id) {
+      const updateOrder = { ...order, status: 'Passed' }
+      updatedOrders.push(updateOrder);
+    } else {
+      updatedOrders.push(order);
+    }
+  });
+  const res = await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, { orders: updatedOrders });
+  dispatch(getOrders)
+
+}
+
+export const rejectOrder = (userId, id) => async (dispatch) => {
+  const { data } = await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
+  let updatedOrders = [];
+  data.orders.forEach((order) => {
+    if (order.id === id) {
+      const updateOrder = { ...order, status: 'Rejected' }
+      updatedOrders.push(updateOrder);
+    } else {
+      updatedOrders.push(order);
+    }
+  });
+  const res = await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, { orders: updatedOrders });
+  dispatch(getOrders)
+}
+
+export const getCarts = async (dispatch) => {
   const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
-    let cartDetails = [];
-    data.forEach(({ cart }) =>
-      cart.forEach((c) => {
-        cartDetails.push(c);
-      })
-    );
-    dispatch(getCartsSuccess(cartDetails));
+  let cartDetails = [];
+  data.forEach(({ cart }) =>
+    cart.forEach((c) => {
+      cartDetails.push(c);
+    })
+  );
+  dispatch(getCartsSuccess(cartDetails));
 }; 
-
-
-export const pendingOrder=(userId,id)=>async(dispatch) =>{
-  const {data}=await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
-  let updatedOrders=[];
-  data.orders.forEach((order) =>{
-    if(order.id===id){
-      const updateOrder = {...order,status:'Delayed'}
-      updatedOrders.push(updateOrder);
-    }else{
-      updatedOrders.push(order);
-    }    
-  });
-}
-
-export const passOrder=(userId,id)=>async(dispatch)=>{
-  const {data}=await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
-  let updatedOrders=[];
-  data.orders.forEach((order) =>{
-    if(order.id===id){
-      const updateOrder = {...order,status:'Passed'}
-      updatedOrders.push(updateOrder);
-    }else{
-      updatedOrders.push(order);
-    }    
-  });
-}
-
-export const rejectOrder=(userId,id)=>async(dispatch)=>{
-  const {data}=await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
-  let updatedOrders=[];
-  data.orders.forEach((order) =>{
-    if(order.id===id){
-      const updateOrder = {...order,status:'Rejected'}
-      updatedOrders.push(updateOrder);
-    }else{
-      updatedOrders.push(order);
-    } 
-  });  
-}
