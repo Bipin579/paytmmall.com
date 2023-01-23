@@ -128,3 +128,14 @@ export const addToCart = (id, userData, newData) => (dispatch) => {
   })
   
 }
+
+
+export const deleteCartData = (id, cart, userData) => (dispatch) => {
+  userData.cart = cart
+  dispatch(deleteRequestAction());
+  return axios.put(`https://paytmmallserver.onrender.com/users/${id}`, userData).then(() => {
+    dispatch(deleteSuccessAction());
+  }).catch((err) => {
+    dispatch(deleteFailureAction());
+  })
+}

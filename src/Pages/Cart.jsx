@@ -1,6 +1,6 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
@@ -13,7 +13,8 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [single, setSingle] = useState([]);
   const [loading, setLoading] = useState(false);
-  const sumRef = useRef(0)
+  const [user, setUser] = useState({});
+
 
   let userId = localStorage.getItem("userId");
 
@@ -23,7 +24,8 @@ const Cart = () => {
       .get(`https://paytmmallserver.onrender.com/users/${+userId}`)
       .then((res) => {
         setSingle([...res.data.cart]);
-        console.log(res.data)
+        setUser(res.data)
+        console.log(res.data.cart)
 
         setLoading(false);
       })
@@ -32,8 +34,26 @@ const Cart = () => {
         console.log(err);
       });
   };
-  
-  console.log(sumRef);
+  let sum =0
+  if (!loading) {
+    
+    single.forEach((el) => {
+      sum+=+el.discountPrice
+    })
+  }
+
+ 
+  const deleteItem = (id) => {
+    let newCart = single.filter((el) => {
+      return el.id !== id
+    })
+    user.cart = newCart
+    axios.put(`https://paytmmallserver.onrender.com/users/${userId}`, user).then(() => {
+      getUser()
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
   
 
   useEffect(() => {
@@ -68,15 +88,13 @@ const Cart = () => {
               fontWeight="400"
               fontSize={{ base: "md", md: "xl", lg: "2xl" }}
             >
-              <Text as={"span"}>0</Text> Item in your Bag
+                <Text as={"span"}>{single.length}</Text> Item in your Bag
             </Text>
           </Box>
 
           <Box name="cart_card">
               {single.map((el) => {
-               
-                console.log(sumRef)
-                return <SingleCartItem key={el.id} {...el} />
+                return <SingleCartItem key={el.id} {...el} userId={userId} deleteItem={deleteItem} />
             })}
           </Box>
         </Box>
@@ -165,7 +183,7 @@ const Cart = () => {
                 Bag Total
               </Text>
               <Text color={"#F25B22"} fontWeight="400">
-                ₹ {"1122"}
+                ₹ {sum}
               </Text>
             </Box>
             <Box
@@ -201,7 +219,7 @@ const Cart = () => {
                 Amount Payable
               </Text>
               <Text color={"#F25B22"} fontWeight="400">
-                ₹ {"1122"}
+                ₹ {sum}
               </Text>
             </Box>
             <Box>

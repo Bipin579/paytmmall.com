@@ -2,6 +2,9 @@ import {
   ADD_CART_FAILURE,
   ADD_CART_REQUEST,
   ADD_CART_SUCCESS,
+  DELETE_CART_FAILURE,
+  DELETE_CART_REQUEST,
+  DELETE_CART_SUCCESS,
   GET_USER_FAILURE,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -43,6 +46,12 @@ export const reducer = (state = initialState, { type, payload }) => {
     case ADD_CART_SUCCESS:
       return { ...state, isLoading: false };
     case ADD_CART_FAILURE:
+      return { ...state, isLoading: false, isError: true };
+    case DELETE_CART_REQUEST:
+      return { ...state, isLoading: true };
+    case DELETE_CART_SUCCESS:
+      return { ...state, isLoading: false };
+    case DELETE_CART_FAILURE:
       return { ...state, isLoading: false, isError: true };
     default:
       return state;
