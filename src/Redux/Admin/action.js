@@ -119,7 +119,7 @@ export const getUsersList = async (dispatch) => {
   dispatch(getUserListRequest());
   try {
     const { data } = await axios.get(
-      "https://mock-data-zsk0.onrender.com/users"
+      "https://paytmmallserver.onrender.com/users"
     );
     dispatch(getUserListSuccess(data));
   } catch (error) {
@@ -130,9 +130,7 @@ export const getUsersList = async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
   dispatch(deleteUserRequest());
   try {
-    let res = await axios.delete(
-      `https://mock-data-zsk0.onrender.com/users/${id}`
-    );
+    let res = await axios.delete(`https://paytmmallserver.onrender.com/users/${id}`);
     dispatch(deleteUserSuccess(id));
     return res;
   } catch (error) {
@@ -192,7 +190,7 @@ export const getCategories = async (dispatch) => {
   // https://paytmmallserver.onrender.com/users
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();
-  const { data } = await axios.get("https://mock-data-zsk0.onrender.com/users");
+  const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
   let obj = {};
   data.map(({ orders }) =>
     orders.map((order) => {
@@ -207,7 +205,7 @@ export const getOrders = async (dispatch) => {
   dispatch(getOrdersRequest());
   try {
     const { data } = await axios.get(
-      "https://mock-data-zsk0.onrender.com/users"
+      "https://paytmmallserver.onrender.com/users"
     );
     let ordersDetails = [];
     data.forEach(({ orders }) =>
@@ -221,7 +219,7 @@ export const getOrders = async (dispatch) => {
   }
 };
 export const getCarts= async (dispatch) => {
-  const { data } = await axios.get("https://mock-data-zsk0.onrender.com/users");
+  const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
     let cartDetails = [];
     data.forEach(({ cart }) =>
       cart.forEach((c) => {
@@ -233,7 +231,7 @@ export const getCarts= async (dispatch) => {
 
 
 export const pendingOrder=(userId,id)=>async(dispatch) =>{
-  const {data}=await axios.get(`https://mock-data-zsk0.onrender.com/users/${userId}`)
+  const {data}=await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
   let updatedOrders=[];
   data.orders.forEach((order) =>{
     if(order.id===id){
@@ -246,7 +244,7 @@ export const pendingOrder=(userId,id)=>async(dispatch) =>{
 }
 
 export const passOrder=(userId,id)=>async(dispatch)=>{
-  const {data}=await axios.get(`https://mock-data-zsk0.onrender.com/users/${userId}`)
+  const {data}=await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
   let updatedOrders=[];
   data.orders.forEach((order) =>{
     if(order.id===id){
@@ -256,11 +254,10 @@ export const passOrder=(userId,id)=>async(dispatch)=>{
       updatedOrders.push(order);
     }    
   });
-  // axios.fetch(`https://mock-data-zsk0.onrender.com/users/${userId}`,{})
 }
 
 export const rejectOrder=(userId,id)=>async(dispatch)=>{
-  const {data}=await axios.get(`https://mock-data-zsk0.onrender.com/users/${userId}`)
+  const {data}=await axios.get(`https://paytmmallserver.onrender.com/users/${userId}`)
   let updatedOrders=[];
   data.orders.forEach((order) =>{
     if(order.id===id){
@@ -268,7 +265,6 @@ export const rejectOrder=(userId,id)=>async(dispatch)=>{
       updatedOrders.push(updateOrder);
     }else{
       updatedOrders.push(order);
-    }    
-    // axios.get(`https://mock-data-zsk0.onrender.com/users/${userId}`,{})
+    } 
   });  
 }
