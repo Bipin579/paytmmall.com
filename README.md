@@ -28,8 +28,7 @@
 ![Screenshot (44)](https://user-images.githubusercontent.com/110052834/216414932-c30793da-e547-438f-9dce-5ca07ba3b9ac.png)
 
 
-<h2>🌐Se![Uploading Screenshot (43).png…]()
-e Live</h2>
+<h2>🌐See Live</h2>
 
 [https://paytm-mall-clone-eight.vercel.app/](https://paytm-mall-clone-eight.vercel.app/)
 
