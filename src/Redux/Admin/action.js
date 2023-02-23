@@ -29,9 +29,6 @@ import {
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAILURE,
   GET_CARTS_SUCCESS,
-  UPDATE_ORDER_REQUEST,
-  UPDATE_ORDER_SUCCESS,
-  UPDATE_ORDER_FAILURE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -67,9 +64,6 @@ const getCategoriesSuccess = (payload) => ({ type: GET_CATEGORIES_SUCCESS, paylo
 const getOrdersRequest = () => ({ type: GET_ORDERS_REQUEST });
 const getOrdersSuccess = (payload) => ({ type: GET_ORDERS_SUCCESS, payload });
 const getOrdersFailure = () => ({ type: GET_ORDERS_FAILURE });
-const updateOrderRequest = () => ({ type: UPDATE_ORDER_REQUEST });
-const updateOrderSuccess = (payload) => ({ type: UPDATE_ORDER_SUCCESS, payload });
-const updateOrderFailure = () => ({ type: UPDATE_ORDER_FAILURE });
 const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload })
 
 export const getProducts = (dispatch) => {
@@ -184,6 +178,7 @@ const getAllCategories = async () => {
   });
   return categories;
 };
+
 export const getCategories = async (dispatch) => {
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();

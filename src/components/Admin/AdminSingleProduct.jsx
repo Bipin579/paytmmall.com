@@ -1,18 +1,19 @@
 import { Box, Center, Heading, Text, Stack, Image, IconButton, Flex, useToast, Progress, ButtonGroup, Button, FormControl, FormLabel, Input, SimpleGrid } from '@chakra-ui/react';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
-import React, {useRef, useState} from 'react';
+import React, { useState } from 'react';
 import { deleteProduct, updateProduct } from '../../Redux/Admin/action';
 import { useDispatch } from 'react-redux';
+import { useRef } from 'react';
 
 const SingleProduct = ({ product }) => {
-  const formRef=useRef(product);
+  const formRef=useRef(product)
   const dispatch = useDispatch();
   const price = product.originalPrice.split('-');
   const [showEdit, setShowEdit] = useState(false);
   const toast = useToast();
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(50);
-
+  
   const formChangeHandler = (e) => {
     const { name, value } = e.target;
     formRef.current[name]=value;
@@ -20,27 +21,27 @@ const SingleProduct = ({ product }) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-      try {
-         dispatch(updateProduct(formRef.current));
-         toast(
-          {
-            title: 'Product Updated',
-            description: `${formRef.current.description} has been updated successfully.`,
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-          });
-      } catch (error) {
-        toast(
-          {
-            title: 'Error white editing',
-            description: `${formRef.current.description} has not edit.`,
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-          });
-      }
-      setShowEdit(false)
+    try {
+      dispatch(updateProduct(formRef.current));
+      toast(
+        {
+          title: 'Product Updated',
+          description: `${formRef.current.description} has been updated successfully.`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+    } catch (error) {
+      toast(
+        {
+          title: 'Error white editing',
+          description: `${formRef.current.description} has not edit.`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+    }
+    setShowEdit(false)
   }
 
   const Form1 = () => {
@@ -49,12 +50,12 @@ const SingleProduct = ({ product }) => {
         <Heading w="100%" size={'md'} textAlign={'center'} fontWeight="normal">Edit Product</Heading>
         <FormControl mt={'2'}>
           <FormLabel htmlFor="name" fontWeight={'normal'}>Name</FormLabel>
-          <Input id="description" name='description' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+          <Input id="description" name='description' onChange={formChangeHandler} placeholder={product.description} fontSize={'small'} size={'sm'} />
         </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="brand" fontWeight={'normal'}>Brand</FormLabel>
-            <Input id="brand" type="text" name='brand' onChange={formChangeHandler} size={'sm'} fontSize={'small'} />
-          </FormControl>       
+        <FormControl>
+          <FormLabel htmlFor="brand" fontWeight={'normal'}>Brand</FormLabel>
+          <Input id="brand" type="text" name='brand' onChange={formChangeHandler} placeholder={product.brand} size={'sm'} fontSize={'small'} />
+        </FormControl>
       </>
     );
   };
@@ -67,23 +68,23 @@ const SingleProduct = ({ product }) => {
           <Flex>
             <FormControl mr="5%">
               <FormLabel htmlFor="originalPrice" fontWeight={'normal'}>Original Price</FormLabel>
-              <Input id="original-price" name='originalPrice' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+              <Input id="original-price" name='originalPrice' placeholder={product.originalPrice} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="description" fontWeight={'normal'}>Discount Price</FormLabel>
-              <Input id="discount-price" name='discountPrice' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+              <FormLabel htmlFor="discountPrice" fontWeight={'normal'}>Discount Price</FormLabel>
+              <Input id="discount-price" name='discountPrice' placeholder={product.discountPrice} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
             </FormControl>
           </Flex>
           <FormControl mt={'2'}>
             <FormLabel htmlFor="brand" fontWeight={'normal'}>Category</FormLabel>
-            <Input id="category" type="text" name='category' onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+            <Input id="category" type="text" name='category' placeholder={product.category} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
           </FormControl>
         </SimpleGrid>
       </>
     );
   };
 
-  const handleDelete = (product) => {
+  const handleDelete = () => {
     try {
       dispatch(deleteProduct(product.id));
       toast({
@@ -107,7 +108,7 @@ const SingleProduct = ({ product }) => {
   const editFunc = () => {
     return <Box borderWidth="1px" rounded="lg" shadow="1px 1px 3px rgba(0,0,0,0.3)" maxWidth={200} p={6} m="10px auto" as="form">
       <Progress hasStripe value={progress} mb="5%" mx="5%" isAnimated></Progress>
-      {step === 1 ? <Form1 /> : <Form2 />}
+      {step === 1 ? <Form1 product={product} /> : <Form2 />}
       <ButtonGroup mt="5%" w="100%">
         <Flex w="100%" justifyContent="space-evenly">
           <Button
@@ -136,7 +137,7 @@ const SingleProduct = ({ product }) => {
     </Box>
   }
 
-  if (showEdit) return editFunc(product);
+  if (showEdit) return editFunc();
 
   return (
     <Center bg='white' mt='2'>
