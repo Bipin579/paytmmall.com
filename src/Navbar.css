@@ -4,21 +4,23 @@
   margin-top: 2vh;
 }
 .navbar {
-  height: 80px;
+  /* height: 80px; */
+  padding: 10px;
   display: flex;
   justify-content: space-evenly;
   text-align: center;
   align-items: center;
   margin-top: 1vh;
+  width: 100%;
 }
 .navbar a {
   text-decoration: none;
   color: #252525;
 }
 .navLeft {
-  width: 66%;
-  display: flex;
-  align-items: center;
+  /* width: 66%; */
+  /* display: flex; */
+  /* align-items: center; */
   
 }
 
@@ -49,10 +51,10 @@
 .options input {
   width: 95%;
   border: none;
-  outline: 0;
+  outline: none;
 }
 .options img {
-  height: 18px;
+  /* height: 18px; */
   margin: auto;
 }
 
@@ -65,7 +67,6 @@
 .order,
 .cart,
 .user {
-  width: 22%;
   font-size: 0.85rem;
   display: flex;
   align-items: center;
@@ -82,24 +83,25 @@
 }
 .nav_right {
   display: flex;
-  width: 30%;
+  /* width: 30%; */
   justify-content: space-evenly;
   align-items: center;
-  right: 12px;
-  padding: 2px;
+  column-gap: 20px;
+  /* right: 12px;
+  padding: 2px; */
   background-color: white;
 }
 /* .nav_right div {
   width: 28%;
 } */
 .searchBar{
-  margin-top: 8px;
+  /* margin-top: 8px; */
   
     font-size: small;
 }
 /* categories */
 .nav_category{
-    border: 1px solid rgba(128, 128, 128, 0.473);
+    /* border: 1px solid rgba(128, 128, 128, 0.473); */
     display: flex;
     justify-content:space-around;
     align-items: center;

@@ -31,22 +31,28 @@ function Login() {
   const location = useLocation();
   const comingFrom = location.state?.from?.pathname || "/";
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+
   
 
-  useEffect(() => {
-    dispatch(getUsers);
-  }, []);
-
   // console.log(users);
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
-    let check = users.find((el) => {
+    console.log(users);
+    if (
+      (email === "bipin@gmail.com" && password === "bipin") ||
+      (email === "ritik@gmail.com" && password === "ritik")
+    ) {
+      return navigate("/admin");
+    } else {
+      
+   
+    let check = await users.find((el) => {
       return el.email === email && el.password === password;
     });
     console.log(check);
-    localStorage.setItem("userId",check.id)
-    if (check) {
+    
+      if (check) {
+        localStorage.setItem("userId", check.id);
       toast({
         title: "Login Successfully.",
         description: ` Welcome ${email}`,
@@ -56,7 +62,7 @@ function Login() {
         isClosable: true,
       });
       dispatch(setLogin);
-      navigate(comingFrom,{replace:true})
+      navigate(comingFrom, { replace: true });
     } else {
       toast({
         title: "Wrong Creadentials.",
@@ -66,11 +72,13 @@ function Login() {
         position: "top",
         isClosable: true,
       });
+      }
     }
   };
-  console.log(isAuth);
-
-
+  useEffect(() => {
+    dispatch(getUsers);
+  }, []);
+  // console.log(isAuth);
 
   return loading ? (
     <Loading />

@@ -1,12 +1,16 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { useState } from "react";
+import CartCounter from "./CartCounter";
 
-const SingleCartItem = ({id, brand, description, discountPrice, img,deleteItem }) => {
-  const [counter, setCounter] = useState(1);
-
- 
-
+const SingleCartItem = ({
+  id,
+  brand,
+  description,
+  discountPrice,
+  img,
+  deleteItem,
+  item
+}) => {
   return (
     <Box display={"flex"} columnGap="20px" pt={"20px"}>
       <Box width="15%">
@@ -25,24 +29,8 @@ const SingleCartItem = ({id, brand, description, discountPrice, img,deleteItem }
         </Text>
       </Box>
       <Box w={"20%"} display="flex" alignItems={"center"}>
-        <Button
-          fontWeight={"800"}
-          fontSize="lg"
-          disabled={counter === 1}
-          onClick={() => setCounter(counter - 1)}
-        >
-          -
-        </Button>
-        <Button fontWeight={"800"}>{counter}</Button>
-        <Button
-          fontWeight={"800"}
-          fontSize="lg"
-          disabled={counter === 5}
-          onClick={() => setCounter(counter + 1)}
-        >
-          +
-        </Button>
-      </Box>
+        <CartCounter item={item} />
+        </Box>
       <Box
         display={"flex"}
         alignItems="center"
@@ -50,7 +38,7 @@ const SingleCartItem = ({id, brand, description, discountPrice, img,deleteItem }
         justifyContent="space-between"
       >
         <Text fontWeight={"bold"}>₹ {discountPrice} </Text>
-        <Button onClick={() =>deleteItem(id)} >
+        <Button onClick={() => deleteItem(id)}>
           <Image
             src="https://cdn-icons-png.flaticon.com/512/6932/6932392.png"
             w={"30px"}

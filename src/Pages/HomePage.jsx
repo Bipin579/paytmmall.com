@@ -33,8 +33,8 @@ const Homepage = () => {
       <button className="groceryprebtn" onClick={groceryPrev}>
       <h1><GrLinkPrevious/></h1>
       </button>
-      <button className="grocerynextbtn" onClick={groceryNext}>
-      <h1><GrLinkNext/></h1>
+      <button className="grocerynextbtn" onClick={groceryNext} >
+      <h1 ><GrLinkNext /></h1>
       </button>
       <div className="grocery-container">
         <div className="grocerycard">
@@ -101,7 +101,8 @@ const Homepage = () => {
         className="shops"
         templateColumns="repeat(4, 1fr)"
         templateRows="600px"
-        gap={12}
+          gap={12}
+          mb={{base:"-300px",md:"-250px",lg:"-150px",xl:"0px"}}
       >
         <GridItem w="100%" h="10">
           <img

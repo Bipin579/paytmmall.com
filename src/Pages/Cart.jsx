@@ -38,7 +38,7 @@ const Cart = () => {
   if (!loading) {
     
     single.forEach((el) => {
-      sum+=+el.discountPrice
+      sum+=+el.discountPrice*+el.item
     })
   }
 

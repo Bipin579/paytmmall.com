@@ -9,6 +9,7 @@ import ManageProducts from './ManageProducts';
 import AddProducts from './AddProducts';
 import AddAdmins from './AddAdmins';
 import Analyse from './Analyse';
+import {Link as Redirect} from "react-router-dom"
 
 const LinkItems = [
     { name: 'Dashboard', compName: 'Dashboard',heading:'Dashboard', icon: FiHome },
@@ -152,7 +153,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                             borderColor={useColorModeValue('gray.200', 'gray.700')}>
                             <MenuItem>Profile</MenuItem>
                             <MenuDivider />
-                            <MenuItem>Sign out</MenuItem>
+                            <MenuItem ><Redirect to="/">Sign out</Redirect></MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>

@@ -1,4 +1,4 @@
-import { Box, Button, Grid, GridItem, Image, SimpleGrid ,Text} from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem, Image, SimpleGrid ,Text, useToast} from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ const SingleProductPage = () => {
   const [singleData, setSingleData] = useState({});
   const dispatch = useDispatch();
   const isLoading = useSelector((store) => store.AuthReducer.isLoading)
-  
+  const toast = useToast();
   const users = useSelector(store => store.AuthReducer.users)
   let userid = localStorage.getItem("userId")
   let userData = users.find((el) => {
@@ -26,22 +26,38 @@ const SingleProductPage = () => {
   })
   
 
+  let newToastSucess = () => {
+    return toast({
+      title: "Success",
+      description: `Added to Cart`,
+      status: "success",
+      duration: 3000,
+      position: "top",
+      isClosable: true,
+    });
+  };
+  let newToastFail = () => {
+    return toast({
+      title: "Error Please Login.",
+      status: "error",
+      duration: 3000,
+      position: "top",
+      isClosable: true,
+    });
+  };
 
  
   const singleProductData = () => {
      
     axios.get(`https://paytmmallserver.onrender.com/product/${id}`).then((res) => {
       setSingleData(res.data);
-      // console.log(singleData);
     }).catch((err) => {
       console.log(err);
     })
   }
   
   const sendCart = () => {
-   
-    console.log("1",userData);
-    dispatch(addToCart(userid,userData,singleData)).then((res) => {
+       dispatch(addToCart(userid,userData,singleData,newToastSucess,newToastFail)).then((res) => {
       dispatch(getUsers)
     });
   }
