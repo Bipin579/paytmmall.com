@@ -10,7 +10,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate,useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +26,7 @@ function Signup() {
   const dispatch = useDispatch();
   const users = useSelector((store) => store.AuthReducer.users);
   const loading = useSelector((store) => store.AuthReducer.isLoading);
+  const navigate = useNavigate()
   
   useEffect(() => {
     dispatch(getUsers);
@@ -33,7 +34,7 @@ function Signup() {
   console.log(users);
   let newToastSucess = () => {
     return toast({
-      title: "Successfully Logged In.",
+      title: "Successfully Registered",
       description: `Welcome ${email}`,
       status: "success",
       duration: 3000,
@@ -76,8 +77,8 @@ function Signup() {
       };
       dispatch(signup(newUser, newToastSucess, newToastFail)).then(() => {
         dispatch(getUsers);
-        <Navigate to={"/login"} />
       });
+      return navigate("/login")
     }
   };
 
@@ -94,7 +95,7 @@ function Signup() {
         
         m="auto"
       >
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} bg={"whatsapp.50"}>
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} >
           <Stack align={"center"}>
             <Heading color={"#002E6E"} fontSize={"4xl"}>
               Create your account

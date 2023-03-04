@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../Navbar.css";
-import { Box, Text, Image, Flex, VStack, InputGroup } from "@chakra-ui/react";
+import { Box, Text, Image, Flex, VStack, InputGroup, Input } from "@chakra-ui/react";
 import cartbag from "./cartbag.png";
 import list from "./list.png";
 import { Link, NavLink } from "react-router-dom";
 import image from "../Utils/image.png";
 import menu from "../Utils/menu.png";
-import search from "../Utils/search.png";
 import { BiSearch } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../Redux/Auth/action";
@@ -84,7 +83,9 @@ const fetchData=(searchValue)=>{
       </Box>
       <Box
         className="navbar"
-        w={{ md: "100%", lg: "100%" }}
+        // w={{ md: "100%", lg: "100%" }}
+        display={"flex"}
+        alignItems="center"
         m="auto"
         position={isSticky ? "fixed" : "static"}
         top="-7px"
@@ -93,23 +94,28 @@ const fetchData=(searchValue)=>{
       >
         <Box
           className="navLeft"
-          gap={{ base: "4px", sm: "10px", md: "15px", lg: "20px" }}
+          display={"flex"}
+          columnGap="20px"
+          w="70%"
+          alignItems={"center"}
         >
-          <Box className="active" w={{ base: "40%", md: "18%", lg: "20%" }}>
+          <Box className="active" border={"1px solid lightgrey"} py={{base:2,md:2,lg:2}} w="30%">
             <Box
               className="nav_category"
-              p={{ base: "1px", sm: "4px", md: "6px", lg: "8px" }}
+              display={"flex"}
+              
+              // p={{ base: "1px", sm: "4px", md: "6px", lg: "8px" }}
             >
               <Image
                 src={menu}
                 alt=""
                 color="red"
-                w={{ base: "10px", md: "15px", lg: "18px" }}
+                w={"1rem"}
               />
               <Box
-                marginTop={{ base: "-6px", sm: "0px", md: "0px", lg: "0px" }}
+                // marginTop={{ base: "-6px", sm: "0px", md: "0px", lg: "0px" }}
               >
-                <Text as="b" fontSize={{ base: "6px", md: "12px", lg: "14px" }}>
+                <Text  fontSize={{base:".5rem",md:".8rem"}} fontWeight={"400"}>
                   Shop By Category
                 </Text>
               </Box>
@@ -184,18 +190,20 @@ const fetchData=(searchValue)=>{
 
           <Box
             className="options"
-            w={{ base: "50%", md: "77%", lg: "82%" }}
-            p={{ base: "0px", sm: "4px", md: "4px", lg: "4px" }}
+            w={"70%"}
+            // p={{ base: "0px", sm: "4px", md: "4px", lg: "4px" }}
           >
             {/* use debouncing   */}
-            <Box w="100%">
-              <InputGroup>
-                <input
-                  w={{ base: "40%", md: "40%", lg: "100%" }}
+            <Box w="100%" >
+              <InputGroup display={"flex"} alignItems="center">
+                <Input
+                  _focus={{boxShadow:"none !important"}}
+                  w={"100%"}
+                  // h={"2%"}
                   className="searchBar"
                   type="text"
                   placeholder="Search for a Product, Brand or Category"
-                  h="38px"
+                  // h="38px"
                   fontSize="14px"
                   ref={ref}
                   onInput={handleinput}
@@ -228,64 +236,66 @@ const fetchData=(searchValue)=>{
                 ))}
               </Box>
             </Box>
-            <Box m="10px">
+            <Box  display={"flex"} alignItems="center">
               {" "}
-              <BiSearch color="red" />
+              <BiSearch width={"md"} color="red" />
             </Box>
           </Box>
         </Box>
 
         <Box
           className="nav_right"
-          ml={{ base: "-15px" }}
+          // ml={{ base: "-15px" }}
           p={{ base: "0px" }}
-          w={{ base: "50%", md: "40%", lg: "30%" }}
+          display="flex"
+          alignItems={"center"}
+          w={"30%"}
         >
           <Link to={"/orders"}>
-            <Box className="order" w={{ base: "20%", md: "30%", lg: "33%" }}>
+            <Box className="order" >
               <Image
                 src={list}
                 alt="order_list_logo"
-                w={{ base: "10px", md: "20px", lg: "25px" }}
+                w={"1rem"}
               />
-              <Text fontSize={{ base: "6px", sm: "md", lg: "md" }}>Orders</Text>
+              <Text fontSize={".8rem"} display={{base:"none",md:"block"}}>Orders</Text>
             </Box>
           </Link>
 
           <Link to={"/cart"}>
-            <Box className="cart" w={{ base: "20%", md: "30%", lg: "33%" }}>
+            <Box className="cart" >
               <Image
                 src={cartbag}
                 alt="cart_logo"
-                w={{ base: "10px", md: "20px", lg: "25px" }}
+                w={"1rem"}
               />
-              <Text fontSize={{ base: "6px", md: "md", lg: "md" }}>Cart</Text>
+              <Text fontSize={".8rem"} display={{ base: "none", md: "block" }}>Cart</Text>
             </Box>
           </Link>
           {isAuth ? (
-            <Box className="user" w={{ base: "33%", md: "30%", lg: "33%" }}>
+            <Box className="user" >
               <Image
-                w={{ base: "10px", md: "20px", lg: "20px" }}
+                w={"1rem"}
                 src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
                 alt=""
               />
               <Text
                 onClick={handleAuth}
-                fontSize={{ base: "6px", sm: "md", lg: "md" }}
+                fontSize={".8rem"}
               >
                 Logout
               </Text>
             </Box>
           ) : (
             <Link to={"/login"}>
-              <Box className="user" w={{ base: "33%", md: "30%", lg: "33%" }}>
+              <Box className="user" >
                 <Image
-                  w={{ base: "10px", md: "20px", lg: "20px" }}
+                  w={"1rem"}
                   src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
                   alt=""
                 />
-                <Text fontSize={{ base: "6px", sm: "md", lg: "md" }}>
-                  Login/SignUp
+                <Text fontSize={".8rem"}>
+                  Login
                 </Text>
               </Box>
             </Link>

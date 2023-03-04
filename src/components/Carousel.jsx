@@ -47,13 +47,20 @@ export const Carosel = () => {
   }, []);
 
   return (
+    // <span style={{ color: 'red' }}>
+    //     <GrLinkPrevious />
+    //   </span>
+    //   <span style={{ color: 'blue' }}>
+    //     <GrLinkNext />
+    //   </span>
+
     <div>
       <div className="satyam">
-        <button className="pre-btn" onClick={carouselSlidePrev}>
-        <h1><GrLinkPrevious/></h1>
+        <button  className="pre-btn" onClick={carouselSlidePrev}  >
+        <h1><GrLinkPrevious color="white" style={{color:"white"}} /></h1>
         </button>
         <button className="next-btn" onClick={carouselSlideNext}>
-        <h1><GrLinkNext/></h1>
+        <h1><GrLinkNext color="#fff" style={{color:"#fff", fontSize:"24px"}}/></h1>
         </button>
         <div className="product-carousel">
           {

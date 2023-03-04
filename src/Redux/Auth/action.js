@@ -115,16 +115,19 @@ export const setLogout = (dispatch) => {
 };
 
 
-export const addToCart = (id, userData, newData) => (dispatch) => {
+export const addToCart = (id, userData, newData,success,fail) => (dispatch) => {
   // console.log("Bipin");
+  newData.item = 1;
   userData.cart.push(newData)
   // delete userData["id"]
 // console.log(id);
   dispatch(addRequestAction());
   return axios.put(`https://paytmmallserver.onrender.com/users/${id}`,userData).then((res) => {
     dispatch(addSuccessAction());
+    success()
   }).catch((err) => {
     dispatch(addFailureAction());
+    fail()
   })
   
 }
