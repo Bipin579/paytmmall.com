@@ -129,7 +129,8 @@ function Login() {
                   align={"start"}
                   justify={"space-between"}
                 >
-                  <Checkbox>Remember me</Checkbox>
+                    <Checkbox>Remember me</Checkbox>
+                    {/* work in progress*/}
                   <Link color={"blue.400"}>Forgot password?</Link>
                 </Stack>
                 <Button

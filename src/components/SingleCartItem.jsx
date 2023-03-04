@@ -9,7 +9,8 @@ const SingleCartItem = ({
   discountPrice,
   img,
   deleteItem,
-  item
+  item,
+  setSum
 }) => {
   return (
     <Box display={"flex"} columnGap="20px" pt={"20px"}>
@@ -29,7 +30,7 @@ const SingleCartItem = ({
         </Text>
       </Box>
       <Box w={"20%"} display="flex" alignItems={"center"}>
-        <CartCounter item={item} />
+        <CartCounter item={item} setSum={setSum} Price={discountPrice} />
         </Box>
       <Box
         display={"flex"}
@@ -37,11 +38,11 @@ const SingleCartItem = ({
         width={"20%"}
         justifyContent="space-between"
       >
-        <Text fontWeight={"bold"}>₹ {discountPrice} </Text>
-        <Button onClick={() => deleteItem(id)}>
+        <Text fontWeight={"bold"} fontSize={"1rem"}>₹ {discountPrice} </Text>
+        <Button fontSize={"1rem"} size={{base:"xs","md":"sm"}} onClick={() => deleteItem(id)}>
           <Image
             src="https://cdn-icons-png.flaticon.com/512/6932/6932392.png"
-            w={"30px"}
+            w={"1.5rem"}
           />
         </Button>
       </Box>

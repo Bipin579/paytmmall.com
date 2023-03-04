@@ -17,6 +17,8 @@ import SingleProductPage from '../Pages/SingleProductPage';
 import Admin from '../Pages/Admin';
 import Signup from '../Pages/Signup';
 import PrivateRoute from './PrivateRoute';
+import Checkout from '../Pages/Checkout';
+import Payment from '../Pages/Payment';
 
 const MainRoutes = () => {
   return (
@@ -37,6 +39,8 @@ const MainRoutes = () => {
               <Route path='/product/:id' element={<PrivateRoute><SingleProductPage/></PrivateRoute>} />
               <Route path='/admin' element={<Admin/>} />
               <Route path='/signup' element={<Signup/>} />
+              <Route path='/checkout' element={<Checkout/>} />
+              <Route path='/payment' element={<Payment/>} />
           </Routes>
     </div>
   )
